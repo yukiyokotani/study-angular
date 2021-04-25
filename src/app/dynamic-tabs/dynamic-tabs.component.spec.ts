@@ -8,9 +8,8 @@ describe('DynamicTabsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DynamicTabsComponent ]
-    })
-    .compileComponents();
+      declarations: [DynamicTabsComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

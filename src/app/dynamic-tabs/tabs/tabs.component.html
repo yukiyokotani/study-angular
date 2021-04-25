@@ -1,1 +1,29 @@
-<p>tabs works!</p>
+<div class="tab">
+  <button
+    class="tablinks"
+    *ngFor="let tab of tabs"
+    (click)="selectTab(tab)"
+    [class.active]="tab.active"
+  >
+    {{ tab.title }}
+  </button>
+  <!-- dynamic tabs -->
+  <button
+    class="tablinks"
+    *ngFor="let tab of dynamicTabs"
+    (click)="selectTab(tab)"
+    [class.active]="tab.active"
+  >
+    <span>{{ tab.title }}</span>
+    <mat-icon
+      aria-hidden="false"
+      aria-label="clear icon"
+      class="tab-close"
+      *ngIf="tab.isCloseable"
+      (click)="closeTab(tab)"
+      >clear</mat-icon
+    >
+  </button>
+</div>
+<ng-content></ng-content>
+<ng-template appDynamicTabs #container></ng-template>

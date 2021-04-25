@@ -1,19 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TabComponent } from './tab.component';
+import { WineFormComponent } from './wine-form.component';
 
-describe('TabComponent', () => {
-  let component: TabComponent;
-  let fixture: ComponentFixture<TabComponent>;
+describe('WineFormComponent', () => {
+  let component: WineFormComponent;
+  let fixture: ComponentFixture<WineFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TabComponent],
-    }).compileComponents();
+      declarations: [ WineFormComponent ]
+    })
+    .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TabComponent);
+    fixture = TestBed.createComponent(WineFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
