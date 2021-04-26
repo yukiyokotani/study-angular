@@ -6,27 +6,29 @@ const port = 8080
 const todos = [
   {
     id: 0,
-    todo: "Drip Coffee",
+    title: "Drip Coffee",
     isCompleted: true,
   },
   {
     id: 1,
-    todo: "Study Angular",
+    title: "Study Angular",
     isCompleted: false,
   },
   {
     id: 1,
-    todo: "Study NGRX",
+    title: "Study NGRX",
     isCompleted: false,
   }
 ]
 
 app.get('/todos', (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
   res.send(JSON.stringify(todos))
 })
 
 app.post('/todos', (req, res) => {
   todos.push(JSON.parse(JSON.stringify(req.body)))
+  res.header("Access-Control-Allow-Origin", "*");
   res.send(JSON.stringify(todos))
 })
 
