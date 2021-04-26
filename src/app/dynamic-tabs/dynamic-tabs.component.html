@@ -1,2 +1,29 @@
-<p>dynamic-tabs works!</p>
-<p>hoge</p>
+<app-tabs>
+  <app-tab [title]="'Home'">
+    <h3>List of Wine</h3>
+    <app-wines-list
+      [wines]="wines"
+      (addWine)="onAddWine()"
+      (editWine)="onEditWine($event)"
+    ></app-wines-list>
+    <hr />
+    <button
+      mat-stroked-button
+      color="primary"
+      class="btn btn-default"
+      (click)="onOpenAbout()"
+    >
+      <mat-icon aria-hidden="false" aria-label="info icon">info</mat-icon>
+      About this
+    </button>
+  </app-tab>
+</app-tabs>
+
+<ng-template #about>
+  <h3>About this page</h3>
+  <p>This is a sample of dynamic component of Angular.</p>
+</ng-template>
+
+<ng-template #wineEdit>
+  <app-wine-form></app-wine-form>
+</ng-template>
