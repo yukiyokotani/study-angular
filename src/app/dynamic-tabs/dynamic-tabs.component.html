@@ -1,21 +1,23 @@
 <app-tabs>
   <app-tab [title]="'Home'">
-    <h3>List of Wine</h3>
+    <h3 class="title">List of Wine</h3>
     <app-wines-list
       [wines]="wines"
       (addWine)="onAddWine()"
       (editWine)="onEditWine($event)"
     ></app-wines-list>
     <hr />
-    <button
-      mat-stroked-button
-      color="primary"
-      class="btn btn-default"
-      (click)="onOpenAbout()"
-    >
-      <mat-icon aria-hidden="false" aria-label="info icon">info</mat-icon>
-      About this
-    </button>
+    <div class="button">
+      <button
+        mat-stroked-button
+        color="primary"
+        class="btn btn-default"
+        (click)="onOpenAbout()"
+      >
+        <mat-icon aria-hidden="false" aria-label="info icon">info</mat-icon>
+        About this
+      </button>
+    </div>
   </app-tab>
 </app-tabs>
 
@@ -24,6 +26,10 @@
   <p>This is a sample of dynamic component of Angular.</p>
 </ng-template>
 
-<ng-template #wineEdit>
-  <app-wine-form></app-wine-form>
+<!-- コンポーネント内でwineは未定義なので、仮の変数wineを宣言する -->
+<ng-template let-wine="wine" #wineEdit>
+  <app-wine-form
+    [wine]="wine"
+    (saveWine)="onWineFormSubmit($event)"
+  ></app-wine-form>
 </ng-template>

@@ -26,7 +26,6 @@ export class TabsComponent implements AfterContentInit {
   constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
 
   ngAfterContentInit(): void {
-    console.log(this.tabs);
     const activeTabs = this.tabs?.filter((tab) => tab.active);
     if (activeTabs?.length === 0 && this.tabs !== undefined) {
       this.selectTab(this.tabs?.first);
@@ -44,9 +43,9 @@ export class TabsComponent implements AfterContentInit {
       TabComponent
     );
     // anchor directiveによってタブの中身を配置するコンテナを取得
-    const vieContainerRef = this.dynamicTabPlaceholder.viewContainer;
+    const viewContainerRef = this.dynamicTabPlaceholder.viewContainer;
     // componentのインスタンスを取得
-    const componentRef = vieContainerRef.createComponent(componentFactory);
+    const componentRef = viewContainerRef.createComponent(componentFactory);
     // インスタンスにデータをセット
     const instance = componentRef.instance;
     instance.title = title;
@@ -65,7 +64,6 @@ export class TabsComponent implements AfterContentInit {
     this.dynamicTabs.forEach((tab) => (tab.active = false));
     // 選択されたタブをアクティブ化
     selectedTab.active = true;
-    console.log('tabs: ', this.tabs, 'dynamic tabs: ', this.dynamicTabs);
   }
 
   closeTab(closedTab: TabComponent) {

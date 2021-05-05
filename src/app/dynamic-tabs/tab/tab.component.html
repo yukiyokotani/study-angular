@@ -3,6 +3,6 @@
   <ng-container
     *ngIf="template"
     [ngTemplateOutlet]="template"
-    [ngTemplateOutletContext]="dataContext"
+    [ngTemplateOutletContext]="{ wine: dataContext }"
   ></ng-container>
 </div>
