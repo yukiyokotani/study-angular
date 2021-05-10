@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --stats-json",
+    "build": "ng build --prod --stats-json　--base-href /study-angular/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
