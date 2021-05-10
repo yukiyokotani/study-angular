@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
+import { ReactiveFormsModule } from '@angular/forms';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,11 +16,13 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
 import { WinesListComponent } from './dynamic-tabs/wine/wines-list/wines-list.component';
 import { WineFormComponent } from './dynamic-tabs/wine/wine-form/wine-form.component';
 import { TodoEffects } from './todo-list/todo.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { TodoModule } from './todo-list/todo.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,8 @@ import { TodoModule } from './todo-list/todo.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FlexLayoutModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({}),
     TodoModule,
     // Instrumentation must be imported after importing StoreModule (config is optional)
@@ -47,6 +52,7 @@ import { TodoModule } from './todo-list/todo.module';
     MatIconModule,
     MatButtonModule,
     MatTableModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

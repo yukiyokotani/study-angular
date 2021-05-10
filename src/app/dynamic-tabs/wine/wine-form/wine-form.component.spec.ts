@@ -8,9 +8,8 @@ describe('WineFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WineFormComponent ]
-    })
-    .compileComponents();
+      declarations: [WineFormComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
