@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { TabsComponent } from './tabs/tabs.component';
-import { Wine, WineFormComponent } from './wine/wine-form/wine-form.component';
+import { Wine } from './wine/wine-form/wine-form.component';
+import { WinesListComponent } from './wine/wines-list/wines-list.component';
 
 @Component({
   templateUrl: './dynamic-tabs.component.html',
@@ -10,6 +11,7 @@ export class DynamicTabsComponent {
   @ViewChild('about') aboutTemplate!: TemplateRef<unknown>;
   @ViewChild('wineEdit') wineEditTemplate!: TemplateRef<unknown>;
   @ViewChild(TabsComponent) tabsComponent!: TabsComponent;
+  @ViewChild(WinesListComponent) winesListComponent!: WinesListComponent;
 
   wines: Wine[] = [
     {
@@ -37,5 +39,25 @@ export class DynamicTabsComponent {
       wine,
       true
     );
+  }
+
+  onWineFormSubmit(dataModel: Wine) {
+    if (dataModel.id > 0) {
+      this.wines = this.wines.map((wine) => {
+        if (wine.id === dataModel.id) {
+          return dataModel;
+        } else {
+          return wine;
+        }
+      });
+    } else {
+      // create a new one
+      dataModel.id = this.wines[this.wines.length - 1].id + 1;
+      this.wines.push(dataModel);
+    }
+
+    // close the tab
+    this.tabsComponent.closeActiveTab();
+    this.winesListComponent.refresh(this.wines);
   }
 }

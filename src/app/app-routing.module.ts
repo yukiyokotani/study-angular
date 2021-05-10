@@ -6,6 +6,11 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 const routes: Routes = [
   { path: 'dynamic-tabs', component: DynamicTabsComponent },
   { path: 'todo-list', component: TodoListComponent },
+  {
+    path: 'lazy-load',
+    loadChildren: () =>
+      import('./lazy-load/lazy-load.module').then((m) => m.LazyLoadModule),
+  },
 ];
 
 @NgModule({

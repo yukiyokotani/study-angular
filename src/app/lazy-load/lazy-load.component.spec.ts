@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WineFormComponent } from './wine-form.component';
+import { LazyLoadComponent } from './lazy-load.component';
 
-describe('WineFormComponent', () => {
-  let component: WineFormComponent;
-  let fixture: ComponentFixture<WineFormComponent>;
+describe('LazyLoadComponent', () => {
+  let component: LazyLoadComponent;
+  let fixture: ComponentFixture<LazyLoadComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [WineFormComponent],
+      declarations: [LazyLoadComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WineFormComponent);
+    fixture = TestBed.createComponent(LazyLoadComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -25,10 +25,10 @@ export class WinesListComponent implements OnInit {
   dataSource = new MatTableDataSource<Wine>();
 
   ngOnInit(): void {
-    this.refresh();
+    this.refresh(this.wines ?? []);
   }
 
-  refresh(): void {
-    this.dataSource.data = this.wines ?? [];
+  refresh(wines: Wine[]): void {
+    this.dataSource.data = wines;
   }
 }
