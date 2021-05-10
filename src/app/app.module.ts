@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
-import { ReactiveFormsModule } from '@angular/forms';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,7 +21,7 @@ import { WineFormComponent } from './dynamic-tabs/wine/wine-form/wine-form.compo
 import { TodoEffects } from './todo-list/todo.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { TodoModule } from './todo-list/todo.module';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,9 +37,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FlexLayoutModule,
-    ReactiveFormsModule,
     StoreModule.forRoot({}),
+    ReactiveFormsModule,
     TodoModule,
     // Instrumentation must be imported after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({
