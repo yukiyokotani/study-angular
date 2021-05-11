@@ -22,6 +22,7 @@ import { TodoEffects } from './todo-list/todo.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { TodoModule } from './todo-list/todo.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     StoreModule.forRoot({}),
     ReactiveFormsModule,
+    FlexLayoutModule,
     TodoModule,
     // Instrumentation must be imported after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({

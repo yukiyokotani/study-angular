@@ -33,3 +33,7 @@
   margin: -1px 4px;
   vertical-align: middle;
 }
+
+.tab-container {
+  padding: 16px;
+}
