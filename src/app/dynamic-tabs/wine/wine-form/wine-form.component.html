@@ -1,34 +1,71 @@
 <form [formGroup]="wineForm" (ngSubmit)="onWineFormSubmit()">
   <input type="hidden" formControlName="id" />
-  <!-- <div class="form-group">
-    <label for="name">Name</label>
-    <input id="name" type="text" placeholder="Name" formControlName="name" />
-  </div> -->
-  <mat-form-field class="form-group">
-    <mat-label>Name</mat-label>
-    <input matInput type="text" placeholder="Name" formControlName="name" />
-  </mat-form-field>
-  <mat-form-field class="form-group">
-    <mat-label>Farm</mat-label>
-    <input matInput type="text" placeholder="Farm" formControlName="farm" />
-  </mat-form-field>
-  <mat-form-field class="form-group">
-    <mat-label>Vintage</mat-label>
-    <input
-      matInput
-      type="text"
-      placeholder="Vintage"
-      formControlName="vintage"
-    />
-  </mat-form-field>
-  <mat-form-field class="form-group">
-    <mat-label>Size</mat-label>
-    <input matInput type="number" placeholder="Size" formControlName="size" />
-  </mat-form-field>
-  <mat-form-field class="form-group">
-    <mat-label>Price</mat-label>
-    <input matInput type="number" placeholder="Price" formControlName="price" />
-  </mat-form-field>
-
-  <button type="submit" class="btn btn-primary">Save</button>
+  <div fxLayout="row wrap" fxLayoutGap="8px">
+    <mat-form-field
+      class="form-group"
+      fxFlex="calc(20% - 8px)"
+      fxFlex.lt-md="calc(50% - 8px)"
+      fxFlex.lt-sm="100%"
+    >
+      <mat-label>Name</mat-label>
+      <input matInput type="text" placeholder="Name" formControlName="name" />
+    </mat-form-field>
+    <mat-form-field
+      fxFlex="calc(20% - 8px)"
+      fxFlex.lt-md="calc(50% - 8px)"
+      fxFlex.lt-sm="100%"
+      class="form-group"
+    >
+      <mat-label>Farm</mat-label>
+      <input matInput type="text" placeholder="Farm" formControlName="farm" />
+    </mat-form-field>
+    <mat-form-field
+      fxFlex="calc(20% - 8px)"
+      fxFlex.lt-md="calc(50% - 8px)"
+      fxFlex.lt-sm="100%"
+      class="form-group"
+    >
+      <mat-label>Vintage</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Vintage"
+        formControlName="vintage"
+      />
+    </mat-form-field>
+    <mat-form-field
+      fxFlex="calc(20% - 8px)"
+      fxFlex.lt-md="calc(50% - 8px)"
+      fxFlex.lt-sm="100%"
+      class="form-group"
+    >
+      <mat-label>Size</mat-label>
+      <input matInput type="number" placeholder="Size" formControlName="size" />
+    </mat-form-field>
+    <mat-form-field
+      fxFlex="calc(20% - 8px)"
+      fxFlex.lt-md="calc(50% - 8px)"
+      fxFlex.lt-sm="100%"
+      class="form-group"
+    >
+      <mat-label>Price</mat-label>
+      <input
+        matInput
+        type="number"
+        placeholder="Price"
+        formControlName="price"
+      />
+    </mat-form-field>
+  </div>
+  <div class="btn-container">
+    <button
+      mat-stroked-button
+      type="submit"
+      color="primary"
+      class="btn btn-default"
+    >
+      <mat-icon aria-hidden="false" aria-label="info icon">save</mat-icon>
+      Save
+    </button>
+  </div>
 </form>
