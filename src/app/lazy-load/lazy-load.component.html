@@ -1,2 +1,18 @@
-<p>lazy-load works!</p>
-<button (click)="handleClick()">Button</button>
+<div
+  fxLayout="row wrap"
+  fxLayoutGap="8px"
+  fxLayoutAlign="center"
+  class="container"
+>
+  <mat-card fxFlex="80%">
+    <p>Please check the network tab of Chrome DevTools.</p>
+    <button
+      mat-stroked-button
+      type="submit"
+      color="primary"
+      (click)="handleClick()"
+    >
+      Click Me!
+    </button>
+  </mat-card>
+</div>

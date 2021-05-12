@@ -22,6 +22,22 @@ export class DynamicTabsComponent {
       size: 750,
       price: 3828000,
     },
+    {
+      id: 2,
+      name: 'Future Wine',
+      farm: 'Miracle Future Farm',
+      vintage: '2895',
+      size: 900,
+      price: 13500000000,
+    },
+    {
+      id: 3,
+      name: 'Old Wine',
+      farm: 'Old Farm',
+      vintage: '351',
+      size: 38,
+      price: 489000000,
+    },
   ];
 
   onOpenAbout(): void {

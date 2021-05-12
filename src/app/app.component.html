@@ -1,18 +1,19 @@
-<h1>{{ title }}</h1>
-<nav>
-  <ul>
-    <li>
-      <a class="button" routerLink="/">home</a>
-    </li>
-    <li>
-      <a class="button" routerLink="/dynamic-tabs">dynamic-tabs</a>
-    </li>
-    <li>
-      <a class="button" routerLink="/todo-list">todo-list</a>
-    </li>
-    <li>
-      <a class="button" routerLink="/lazy-load">lazy-load</a>
-    </li>
-  </ul>
-</nav>
+<mat-toolbar color="primary">
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Icon-button with menu icon"
+    [matMenuTriggerFor]="menu"
+  >
+    <mat-icon>menu</mat-icon>
+    <span class="example-spacer"></span>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/">Home</button>
+    <button mat-menu-item routerLink="/dynamic-tabs">Dynamic Tabs</button>
+    <button mat-menu-item routerLink="/todo-list">Todo List</button>
+    <button mat-menu-item routerLink="/lazy-load">Lazy-load</button>
+  </mat-menu>
+  <span>{{ title }}</span>
+</mat-toolbar>
 <router-outlet></router-outlet>
