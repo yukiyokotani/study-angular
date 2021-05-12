@@ -13,9 +13,12 @@ import { TabComponent } from './dynamic-tabs/tab/tab.component';
 import { TabsComponent } from './dynamic-tabs/tabs/tabs.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 import { WinesListComponent } from './dynamic-tabs/wine/wines-list/wines-list.component';
 import { WineFormComponent } from './dynamic-tabs/wine/wine-form/wine-form.component';
 import { TodoEffects } from './todo-list/todo.effects';
@@ -50,9 +53,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     EffectsModule.forRoot([TodoEffects]),
     NoopAnimationsModule,
     MatIconModule,
+    MatToolbarModule,
+    MatMenuModule,
     MatButtonModule,
     MatTableModule,
     MatInputModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

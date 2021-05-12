@@ -1,6 +1,18 @@
-<p>todo-list works!</p>
-<ul>
-  <li *ngFor="let todo of todos$ | async">
-    {{ todo.title }}
-  </li>
-</ul>
+<div
+  fxLayout="row wrap"
+  fxLayoutGap="8px"
+  fxLayoutAlign="center"
+  class="container"
+>
+  <mat-card fxFlex="80%">
+    <p>
+      Please start the server with command "npm run server" to check the
+      operation.
+    </p>
+    <ul>
+      <li *ngFor="let todo of todos$ | async">
+        {{ todo.title }}
+      </li>
+    </ul>
+  </mat-card>
+</div>
