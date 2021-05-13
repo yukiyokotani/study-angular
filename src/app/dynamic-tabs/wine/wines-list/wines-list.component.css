@@ -6,6 +6,8 @@
 
 .mat-table {
   margin-bottom: 1rem;
+  width: 100%;
+  max-width: 100%;
 }
 
 .mat-row,

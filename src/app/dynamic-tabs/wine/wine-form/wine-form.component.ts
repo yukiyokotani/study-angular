@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export type Wine = {
   id: number;
@@ -23,12 +23,12 @@ export class WineFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.wineForm = this.fb.group({
-      id: '',
-      name: '',
-      farm: '',
-      vintage: '',
-      size: '',
-      price: '',
+      id: ['', Validators.required],
+      name: ['', Validators.required],
+      farm: ['', Validators.required],
+      vintage: ['', Validators.required],
+      size: ['', Validators.required],
+      price: ['', Validators.required],
     });
   }
 
@@ -44,6 +44,7 @@ export class WineFormComponent implements OnInit {
   }
 
   onWineFormSubmit() {
+    if (this.wineForm.invalid) return;
     const dataModel = this.wineForm.value;
     this.saveWine.emit(dataModel);
   }

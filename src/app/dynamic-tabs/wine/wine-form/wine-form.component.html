@@ -9,6 +9,9 @@
     >
       <mat-label>Name</mat-label>
       <input matInput type="text" placeholder="Name" formControlName="name" />
+      <mat-error *ngIf="wineForm.controls.name.errors?.required"
+        >項目が未入力です
+      </mat-error>
     </mat-form-field>
     <mat-form-field
       fxFlex="calc(20% - 8px)"
@@ -18,6 +21,9 @@
     >
       <mat-label>Farm</mat-label>
       <input matInput type="text" placeholder="Farm" formControlName="farm" />
+      <mat-error *ngIf="wineForm.controls.farm.errors?.required"
+        >項目が未入力です
+      </mat-error>
     </mat-form-field>
     <mat-form-field
       fxFlex="calc(20% - 8px)"
@@ -32,6 +38,9 @@
         placeholder="Vintage"
         formControlName="vintage"
       />
+      <mat-error *ngIf="wineForm.controls.vintage.errors?.required"
+        >項目が未入力です
+      </mat-error>
     </mat-form-field>
     <mat-form-field
       fxFlex="calc(20% - 8px)"
@@ -40,7 +49,10 @@
       class="form-group"
     >
       <mat-label>Size</mat-label>
-      <input matInput type="number" placeholder="Size" formControlName="size" />
+      <input matInput type="tel" placeholder="Size" formControlName="size" />
+      <mat-error *ngIf="wineForm.controls.size.errors?.required"
+        >項目が未入力です
+      </mat-error>
     </mat-form-field>
     <mat-form-field
       fxFlex="calc(20% - 8px)"
@@ -49,12 +61,10 @@
       class="form-group"
     >
       <mat-label>Price</mat-label>
-      <input
-        matInput
-        type="number"
-        placeholder="Price"
-        formControlName="price"
-      />
+      <input matInput type="tel" placeholder="Price" formControlName="price" />
+      <mat-error *ngIf="wineForm.controls.price.errors?.required"
+        >項目が未入力です
+      </mat-error>
     </mat-form-field>
   </div>
   <div fxLayout="row wrap" fxLayoutAlign="end">
