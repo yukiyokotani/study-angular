@@ -12,7 +12,6 @@ const io = require('socket.io')(http,{
 const PORT = process.env.PORT || 7000;
 
 app.get('/', function(req, res){
-  res.header("Access-Control-Allow-Origin", "http://localhost:4200");
   res.send('hello world');
   // res.sendFile(__dirname + '/index.html');
 })
