@@ -6,9 +6,13 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Mock API server
+## Mock HTTP server
 
-Run `npm run server` for a mock API server. It runs on `http://localhost:8080/`.
+Run `npm run http-server` for a mock HTTP server. It runs on `http://localhost:8080/`.
+
+## Mock WebSocket server
+
+Run `npm run websocket-server` for a mock WebSocket server. It runs on `http://localhost:7000/`.
 
 ## Code scaffolding
 

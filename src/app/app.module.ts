@@ -26,6 +26,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { TodoModule } from './todo-list/todo.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { WebsocketComponent } from './websocket/websocket.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     TabsComponent,
     WinesListComponent,
     WineFormComponent,
+    WebsocketComponent,
   ],
   imports: [
     BrowserModule,
