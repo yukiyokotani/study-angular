@@ -10,6 +10,32 @@
       Please start the server with command "npm run http-server" to check the
       operation.
     </p>
+    <div>
+      <mat-form-field
+        class="form-group"
+        fxFlex="calc(20% - 8px)"
+        fxFlex.lt-md="calc(50% - 8px)"
+        fxFlex.lt-sm="100%"
+      >
+        <mat-label>Todo</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Message"
+          [formControl]="todo"
+        />
+        <mat-error *ngIf="todo.errors?.required">項目が未入力です </mat-error>
+      </mat-form-field>
+    </div>
+    <button
+      mat-stroked-button
+      type="submit"
+      color="primary"
+      (click)="createTodo()"
+    >
+      <mat-icon aria-hidden="false" aria-label="info icon"> add </mat-icon>
+      Add Todo
+    </button>
     <ul>
       <li *ngFor="let todo of todos$ | async">
         {{ todo.title }}

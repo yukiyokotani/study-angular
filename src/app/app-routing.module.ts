@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DynamicTabsComponent } from './dynamic-tabs/dynamic-tabs.component';
-import { TodoListComponent } from './todo-list/todo-list.component';
 import { WebsocketComponent } from './websocket/websocket.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { HomeComponent } from './home/home.component';
@@ -9,7 +8,11 @@ import { HomeComponent } from './home/home.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'dynamic-tabs', component: DynamicTabsComponent },
-  { path: 'todo-list', component: TodoListComponent },
+  {
+    path: 'todo-list',
+    loadChildren: () =>
+      import('./todo-list/todo.module').then((m) => m.TodoModule),
+  },
   {
     path: 'lazy-load',
     loadChildren: () =>
