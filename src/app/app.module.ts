@@ -23,7 +23,6 @@ import { WinesListComponent } from './dynamic-tabs/wine/wines-list/wines-list.co
 import { WineFormComponent } from './dynamic-tabs/wine/wine-form/wine-form.component';
 import { TodoEffects } from './todo-list/todo.effects';
 import { EffectsModule } from '@ngrx/effects';
-import { TodoModule } from './todo-list/todo.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { WebsocketComponent } from './websocket/websocket.component';
@@ -48,7 +47,6 @@ import { HomeComponent } from './home/home.component';
     StoreModule.forRoot({}),
     ReactiveFormsModule,
     FlexLayoutModule,
-    TodoModule,
     // Instrumentation must be imported after importing StoreModule (config is optional)
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
