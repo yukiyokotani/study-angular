@@ -5,7 +5,12 @@
   class="container"
 >
   <mat-card fxFlex="80%" fxFlex.lt-sm="100%">
-    <p>websocket works!</p>
+    <h1>WebSocket</h1>
+    <p>
+      Please start the server with command "npm run websocket-server" to check
+      the operation. The sent message will be output to the log of the terminal
+      where express is running.
+    </p>
     <div>
       <mat-form-field
         class="form-group"
@@ -31,6 +36,7 @@
       color="primary"
       (click)="sendMessage()"
     >
+      <mat-icon aria-hidden="false" aria-label="info icon">send</mat-icon>
       Send Message
     </button>
   </mat-card>

@@ -27,6 +27,7 @@ import { TodoModule } from './todo-list/todo.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { WebsocketComponent } from './websocket/websocket.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { WebsocketComponent } from './websocket/websocket.component';
     WinesListComponent,
     WineFormComponent,
     WebsocketComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
