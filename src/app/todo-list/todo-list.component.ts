@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { createSelector, Store } from '@ngrx/store';
 import todoSlice, { Todo, selectTodos } from './todoSlice';
 
@@ -8,6 +9,7 @@ import todoSlice, { Todo, selectTodos } from './todoSlice';
 })
 export class TodoListComponent implements OnInit {
   todos$ = this.store.select(createSelector(selectTodos, (state) => state));
+  todo = new FormControl('', Validators.required);
 
   constructor(private readonly store: Store<Todo>) {}
 
@@ -17,5 +19,12 @@ export class TodoListComponent implements OnInit {
 
   loadTodos(): void {
     this.store.dispatch(todoSlice.actions.getTodos());
+  }
+
+  createTodo(): void {
+    if (this.todo.invalid) return;
+    this.store.dispatch(todoSlice.actions.createTodo(this.todo.value));
+    this.todo.setValue('');
+    this.todo.setErrors(null);
   }
 }

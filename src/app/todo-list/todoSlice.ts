@@ -16,7 +16,7 @@ const todoSlice = createSlice({
     getTodos: () => {
       return;
     },
-    createTodo: () => {
+    createTodo: (_, action: PayloadAction<string>) => {
       return;
     },
     setTodo: (state, action: PayloadAction<Todo[]>) => {

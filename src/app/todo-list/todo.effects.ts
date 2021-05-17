@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
@@ -25,17 +25,25 @@ export class TodoEffects {
   addTodo$ = createEffect(() =>
     this.actions$.pipe(
       ofType(todoSlice.actions.createTodo),
-      mergeMap((action) =>
-        this.httpClient
-          .post('http://localhost:8080/todos', JSON.stringify(action.payload))
+      mergeMap((action) => {
+        const headers = new HttpHeaders({
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          'Content-Type': 'application/json; charset=utf-8',
+        });
+        return this.httpClient
+          .post(
+            'http://localhost:8080/todos',
+            JSON.stringify({ title: action.payload }),
+            { headers }
+          )
           .pipe(
             map((todos) => ({
               type: todoSlice.actions.setTodo.type,
               payload: todos,
             })),
             catchError(() => EMPTY)
-          )
-      )
+          );
+      })
     )
   );
 
