@@ -27,6 +27,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { WebsocketComponent } from './websocket/websocket.component';
 import { HomeComponent } from './home/home.component';
+import { HighlightDirective } from './directives/highlight.directive';
+import { MiliLiterPipe } from './pipes/mili-liter.pipe';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { HomeComponent } from './home/home.component';
     WineFormComponent,
     WebsocketComponent,
     HomeComponent,
+    HighlightDirective,
+    MiliLiterPipe,
   ],
   imports: [
     BrowserModule,
