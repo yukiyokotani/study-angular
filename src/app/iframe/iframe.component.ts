@@ -1,10 +1,12 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   templateUrl: './iframe.component.html',
   styleUrls: ['./iframe.component.css'],
 })
 export class IframeComponent implements OnInit {
+  host = environment.host;
   message = '';
 
   constructor() {}

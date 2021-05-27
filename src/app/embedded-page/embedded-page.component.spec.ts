@@ -8,9 +8,8 @@ describe('EmbeddedPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EmbeddedPageComponent ]
-    })
-    .compileComponents();
+      declarations: [EmbeddedPageComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
