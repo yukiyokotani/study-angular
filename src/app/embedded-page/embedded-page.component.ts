@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   templateUrl: './embedded-page.component.html',
@@ -28,7 +29,7 @@ export class EmbeddedPageComponent implements OnInit {
         type: 'message',
         value: { message: 'Hello! I send this message from iframe!' },
       },
-      'http://localhost:4200/#/iframe'
+      `${environment.host}/#/iframe`
     );
   }
 }
