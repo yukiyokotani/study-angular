@@ -4,6 +4,8 @@ import { DynamicTabsComponent } from './dynamic-tabs/dynamic-tabs.component';
 import { WebsocketComponent } from './websocket/websocket.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { HomeComponent } from './home/home.component';
+import { IframeComponent } from './iframe/iframe.component';
+import { EmbeddedPageComponent } from './embedded-page/embedded-page.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,6 +23,14 @@ const routes: Routes = [
   {
     path: 'websocket',
     component: WebsocketComponent,
+  },
+  {
+    path: 'iframe',
+    component: IframeComponent,
+  },
+  {
+    path: 'embedded-page',
+    component: EmbeddedPageComponent,
   },
 ];
 

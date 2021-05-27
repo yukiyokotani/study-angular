@@ -1,0 +1,37 @@
+<div
+  fxLayout="row wrap"
+  fxLayoutGap="8px"
+  fxLayoutAlign="center"
+  class="container"
+>
+  <mat-card fxFlex="80%" fxFlex.lt-sm="100%">
+    <h1>iframe</h1>
+    <div>
+      <iframe
+        id="inlineFrameExample"
+        title="Inline Frame Example"
+        width="100%"
+        height="500"
+        src="http://localhost:4200/#/embedded-page"
+      >
+      </iframe>
+    </div>
+    <div>
+      <span>Received Message: </span><span>{{ message }}</span>
+    </div>
+  </mat-card>
+</div>
+<div
+  fxLayout="row wrap"
+  fxLayoutGap="8px"
+  fxLayoutAlign="center"
+  class="container"
+>
+  <mat-card fxFlex="80%" fxFlex.lt-sm="100%">
+    <h1>補足</h1>
+    <p>子画面はiframeからwindow.parentへpostMessageしている。</p>
+    <p>
+      親画面はAngularの@HostListenerを使ってwindowにmessageイベントのイベントハンドラを定義している。
+    </p>
+  </mat-card>
+</div>

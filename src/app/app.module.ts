@@ -29,6 +29,8 @@ import { WebsocketComponent } from './websocket/websocket.component';
 import { HomeComponent } from './home/home.component';
 import { HighlightDirective } from './directives/highlight.directive';
 import { MiliLiterPipe } from './pipes/mili-liter.pipe';
+import { IframeComponent } from './iframe/iframe.component';
+import { EmbeddedPageComponent } from './embedded-page/embedded-page.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { MiliLiterPipe } from './pipes/mili-liter.pipe';
     HomeComponent,
     HighlightDirective,
     MiliLiterPipe,
+    IframeComponent,
+    EmbeddedPageComponent,
   ],
   imports: [
     BrowserModule,
