@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -6,10 +7,10 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./iframe.component.css'],
 })
 export class IframeComponent implements OnInit {
-  host = environment.host;
+  urlSafe!: SafeResourceUrl;
   message = '';
 
-  constructor() {}
+  constructor(public sanitizer: DomSanitizer) {}
 
   @HostListener('window:message', ['$event']) onPostMessage(
     event: MessageEvent
@@ -28,5 +29,9 @@ export class IframeComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(
+      environment.host + '/embedded-page'
+    );
+  }
 }

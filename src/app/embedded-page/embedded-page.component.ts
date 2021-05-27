@@ -29,7 +29,7 @@ export class EmbeddedPageComponent implements OnInit {
         type: 'message',
         value: { message: 'Hello! I send this message from iframe!' },
       },
-      `${environment.host}/#/iframe`
+      `${environment.host}/iframe`
     );
   }
 }
