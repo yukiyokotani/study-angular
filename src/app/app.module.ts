@@ -31,6 +31,7 @@ import { HighlightDirective } from './directives/highlight.directive';
 import { MiliLiterPipe } from './pipes/mili-liter.pipe';
 import { IframeComponent } from './iframe/iframe.component';
 import { EmbeddedPageComponent } from './embedded-page/embedded-page.component';
+import { CustomMatcherComponent } from './custom-matcher/custom-matcher.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { EmbeddedPageComponent } from './embedded-page/embedded-page.component';
     MiliLiterPipe,
     IframeComponent,
     EmbeddedPageComponent,
+    CustomMatcherComponent,
   ],
   imports: [
     BrowserModule,
