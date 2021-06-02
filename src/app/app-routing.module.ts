@@ -49,6 +49,9 @@ const routes: Routes = [
       }
       return null;
     },
+    data: {
+      message: 'This is a extra data',
+    },
     component: CustomMatcherComponent,
   },
 ];
