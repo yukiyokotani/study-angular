@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Data } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -11,6 +11,8 @@ export class CustomMatcherComponent implements OnInit {
   rest$ = this.route.paramMap.pipe(
     map((params: ParamMap) => params.get('rest'))
   );
+
+  data$ = this.route.data.pipe(map((data: Data) => data.message));
 
   sampleUrl = environment.host + '/custom-matcher/restparam';
 
