@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, UrlSegment } from '@angular/router';
 import { DynamicTabsComponent } from './dynamic-tabs/dynamic-tabs.component';
 import { WebsocketComponent } from './websocket/websocket.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { IframeComponent } from './iframe/iframe.component';
 import { EmbeddedPageComponent } from './embedded-page/embedded-page.component';
+import { CustomMatcherComponent } from './custom-matcher/custom-matcher.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -31,6 +32,24 @@ const routes: Routes = [
   {
     path: 'embedded-page',
     component: EmbeddedPageComponent,
+  },
+  {
+    matcher: (url) => {
+      if (url[0].path.match(/^custom-matcher$/)) {
+        //\/[0-9a-zA-Z]+$
+        return {
+          consumed: url,
+          posParams:
+            url.length === 1
+              ? undefined
+              : {
+                  rest: new UrlSegment(url[1].path, {}),
+                },
+        };
+      }
+      return null;
+    },
+    component: CustomMatcherComponent,
   },
 ];
 

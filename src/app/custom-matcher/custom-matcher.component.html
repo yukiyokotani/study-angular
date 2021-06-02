@@ -1,0 +1,12 @@
+<div
+  fxLayout="row wrap"
+  fxLayoutGap="8px"
+  fxLayoutAlign="center"
+  class="container"
+>
+  <mat-card fxFlex="80%" fxFlex.lt-sm="100%">
+    <h1>Custom Matcher</h1>
+    <p>Rest path parameter is "{{ rest$ | async }}"</p>
+    <a href="{{ sampleUrl }}">Sample url having rest parameter.</a>
+  </mat-card>
+</div>
