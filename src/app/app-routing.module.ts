@@ -51,6 +51,7 @@ const routes: Routes = [
     },
     data: {
       message: 'This is a extra data',
+      component: WebsocketComponent,
     },
     component: CustomMatcherComponent,
   },
