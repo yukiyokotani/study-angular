@@ -1,13 +1,24 @@
-<div
-  fxLayout="row wrap"
-  fxLayoutGap="8px"
-  fxLayoutAlign="center"
-  class="container"
->
-  <mat-card fxFlex="80%" fxFlex.lt-sm="100%">
-    <h1>Custom Matcher</h1>
-    <p>Rest path parameter is "{{ rest$ | async }}"</p>
-    <p>Extra data is "{{ data$ | async }}"</p>
-    <a href="{{ sampleUrl }}">Sample url having rest parameter.</a>
-  </mat-card>
+<div class="container">
+  <div fxLayout="row wrap" fxLayoutGap="16px grid" fxLayoutAlign="center">
+    <div fxFlex="80%" fxFlex.lt-sm="100%">
+      <mat-card>
+        <h1>Custom Matcher</h1>
+        <p>Rest path parameter is "{{ rest$ | async }}"</p>
+        <p>Extra data is "{{ message$ | async }}"</p>
+        <a href="{{ sampleUrl }}">Sample url having rest parameter.</a>
+      </mat-card>
+    </div>
+    <div fxFlex="80%" fxFlex.lt-sm="100%">
+      <mat-card>
+        <h1>Routerのデータから受け取ったコンポーネントを描画</h1>
+        <p>
+          Routerのdataプロパティにセットしたコンポーネントをng-containerへNgComponentOutletディレクティブを使って展開している
+        </p>
+        <ng-container
+          class="alt-component"
+          *ngComponentOutlet="component$ | async"
+        ></ng-container>
+      </mat-card>
+    </div>
+  </div>
 </div>
