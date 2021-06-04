@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { io, Socket } from 'socket.io-client';
 import { Observable, Subject } from 'rxjs';
+import { io, Socket } from 'socket.io-client';
 import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
 
 @Injectable({

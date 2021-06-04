@@ -1,12 +1,13 @@
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, UrlSegment } from '@angular/router';
+
+import { CustomMatcherComponent } from './custom-matcher/custom-matcher.component';
 import { DynamicTabsComponent } from './dynamic-tabs/dynamic-tabs.component';
-import { WebsocketComponent } from './websocket/websocket.component';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { EmbeddedPageComponent } from './embedded-page/embedded-page.component';
 import { HomeComponent } from './home/home.component';
 import { IframeComponent } from './iframe/iframe.component';
-import { EmbeddedPageComponent } from './embedded-page/embedded-page.component';
-import { CustomMatcherComponent } from './custom-matcher/custom-matcher.component';
+import { WebsocketComponent } from './websocket/websocket.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
