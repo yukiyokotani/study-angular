@@ -8,6 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "update-package": "ng update @angular/cli @angular/core @angular/material @angular/cdk @angular/flex-layout",
     "bundle-stats": "webpack-bundle-analyzer dist/study-angular/stats.json",
     "http-server": "nodemon server/http-server.js",
     "websocket-server": "nodemon server/websocket-server.js"
