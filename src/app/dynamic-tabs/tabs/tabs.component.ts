@@ -7,6 +7,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
+
 import { DynamicTabsDirective } from '../dynamic-tabs.directive';
 import { TabComponent } from '../tab/tab.component';
 

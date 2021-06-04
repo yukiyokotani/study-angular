@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SocketioService } from './socketio.service';
 import { FormControl, Validators } from '@angular/forms';
+
+import { SocketioService } from './socketio.service';
 
 @Component({
   templateUrl: './websocket.component.html',
