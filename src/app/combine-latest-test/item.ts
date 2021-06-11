@@ -1,23 +1,23 @@
 import { BehaviorSubject, Observable } from 'rxjs';
 
-export interface MyItemField {
+export interface ItemField {
   id: string;
   message: string;
 }
 
-export class MyItem {
-  myItem$: BehaviorSubject<MyItemField>;
+export class Item {
+  item$: BehaviorSubject<ItemField>;
 
   constructor(id: string, message: string) {
-    this.myItem$ = new BehaviorSubject({ id, message });
+    this.item$ = new BehaviorSubject({ id, message });
   }
 
-  get myItemChanges(): Observable<MyItemField> {
-    return this.myItem$.asObservable();
+  get itemChanges(): Observable<ItemField> {
+    return this.item$.asObservable();
   }
 
-  // setMessage(newMessage: string): void {
-  //   const current = this.myItem$.getValue();
-  //   this.myItem$.next({ ...current, message: newMessage });
-  // }
+  setMessage(newMessage: string): void {
+    const current = this.item$.getValue();
+    this.item$.next({ ...current, message: newMessage });
+  }
 }

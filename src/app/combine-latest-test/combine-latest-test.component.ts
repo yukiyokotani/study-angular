@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
-import { MyItemField } from './item';
+import { ItemField } from './item';
 import { ItemListService } from './item-list.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { ItemListService } from './item-list.service';
 })
 export class CombineLatestTestComponent implements OnInit, OnDestroy {
   itemListSubscription: Subscription;
-  itemList$: Observable<MyItemField>[] = [];
+  itemList$: Observable<ItemField>[] = [];
 
   constructor(private itemListService: ItemListService) {
     this.itemListSubscription = this.itemListService.itemsListChanges.subscribe(
