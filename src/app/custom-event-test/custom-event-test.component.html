@@ -5,10 +5,11 @@
   class="container"
 >
   <mat-card fxFlex="80%" fxFlex.lt-sm="100%">
-    <h1>Observable.combineLatest</h1>
-    <p>This is a test of combineLatest operator of RxJS.</p>
-    <div *ngFor="let item$ of itemList$">
-      <div>{{ (item$ | async)?.message }}</div>
+    <h1>Observable.customEvent</h1>
+    <p>This is a test of customEvent operator of RxJS.</p>
+    <div *ngFor="let item of itemList" class="block">
+      <button mat-stroked-button (click)="item.handleClick()">Button</button>
+      <span>{{ item.message }}</span>
     </div>
     <button mat-stroked-button color="primary" (click)="addItem()">
       Button

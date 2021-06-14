@@ -19,7 +19,7 @@ import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CombineLatestTestComponent } from './combine-latest-test/combine-latest-test.component';
+import { CustomEventTestComponent } from './custom-event-test/custom-event-test.component';
 import { CustomMatcherComponent } from './custom-matcher/custom-matcher.component';
 import { HighlightDirective } from './directives/highlight.directive';
 import { DynamicTabsComponent } from './dynamic-tabs/dynamic-tabs.component';
@@ -51,7 +51,7 @@ import { WebsocketComponent } from './websocket/websocket.component';
     IframeComponent,
     EmbeddedPageComponent,
     CustomMatcherComponent,
-    CombineLatestTestComponent,
+    CustomEventTestComponent,
   ],
   imports: [
     BrowserModule,

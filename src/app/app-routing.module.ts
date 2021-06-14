@@ -2,7 +2,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, UrlSegment } from '@angular/router';
 
-import { CombineLatestTestComponent } from './combine-latest-test/combine-latest-test.component';
+import { CustomEventTestComponent } from './custom-event-test/custom-event-test.component';
 import { CustomMatcherComponent } from './custom-matcher/custom-matcher.component';
 import { DynamicTabsComponent } from './dynamic-tabs/dynamic-tabs.component';
 import { EmbeddedPageComponent } from './embedded-page/embedded-page.component';
@@ -36,8 +36,8 @@ const routes: Routes = [
     component: EmbeddedPageComponent,
   },
   {
-    path: 'combine-latest',
-    component: CombineLatestTestComponent,
+    path: 'custom-event',
+    component: CustomEventTestComponent,
   },
   {
     matcher: (url) => {
