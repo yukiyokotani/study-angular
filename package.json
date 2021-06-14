@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
-    "build": "ng build --prod --deploy-url=/study-angular/ --base-href=/study-angular/ --stats-json",
+    "build": "ng build --configuration production --deploy-url=/study-angular/ --base-href=/study-angular/ --stats-json",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
