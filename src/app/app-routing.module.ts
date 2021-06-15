@@ -2,12 +2,13 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, UrlSegment } from '@angular/router';
 
-import { CustomEventTestComponent } from './custom-event-test/custom-event-test.component';
 import { CustomMatcherComponent } from './custom-matcher/custom-matcher.component';
 import { DynamicTabsComponent } from './dynamic-tabs/dynamic-tabs.component';
 import { EmbeddedPageComponent } from './embedded-page/embedded-page.component';
 import { HomeComponent } from './home/home.component';
 import { IframeComponent } from './iframe/iframe.component';
+import { NestedEventBindingComponent } from './nested-event-binding/nested-event-binding.component';
+import { TsClassSubscriptionComponent } from './ts-class-subscription/ts-class-subscription.component';
 import { WebsocketComponent } from './websocket/websocket.component';
 
 const routes: Routes = [
@@ -36,8 +37,12 @@ const routes: Routes = [
     component: EmbeddedPageComponent,
   },
   {
-    path: 'custom-event',
-    component: CustomEventTestComponent,
+    path: 'ts-class-subscription',
+    component: TsClassSubscriptionComponent,
+  },
+  {
+    path: 'nested-event-binding',
+    component: NestedEventBindingComponent,
   },
   {
     matcher: (url) => {

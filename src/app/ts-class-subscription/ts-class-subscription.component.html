@@ -1,0 +1,26 @@
+<div
+  fxLayout="row wrap"
+  fxLayoutGap="8px"
+  fxLayoutAlign="center"
+  class="container"
+>
+  <mat-card fxFlex="80%" fxFlex.lt-sm="100%">
+    <h1>Angular TS-Class Item Subscription</h1>
+    <p>
+      This is a test of subscription of non-angular class in Angualr. Please
+      check current item list and event subscription in console.
+    </p>
+    <div *ngFor="let item of itemList; in" class="block">
+      <button mat-stroked-button color="accent" (click)="removeItem(item.id)">
+        Remove
+      </button>
+      <button mat-stroked-button (click)="item.setMessage('New Message')">
+        Set New Message
+      </button>
+      <span>{{ item.message }}</span>
+    </div>
+    <button mat-stroked-button color="primary" (click)="addItem()">
+      Add Item
+    </button>
+  </mat-card>
+</div>

@@ -19,7 +19,6 @@ import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CustomEventTestComponent } from './custom-event-test/custom-event-test.component';
 import { CustomMatcherComponent } from './custom-matcher/custom-matcher.component';
 import { HighlightDirective } from './directives/highlight.directive';
 import { DynamicTabsComponent } from './dynamic-tabs/dynamic-tabs.component';
@@ -31,8 +30,12 @@ import { WinesListComponent } from './dynamic-tabs/wine/wines-list/wines-list.co
 import { EmbeddedPageComponent } from './embedded-page/embedded-page.component';
 import { HomeComponent } from './home/home.component';
 import { IframeComponent } from './iframe/iframe.component';
+import { ComponentDirective } from './nested-event-binding/component.directive';
+import { NestedEventBindingComponent } from './nested-event-binding/nested-event-binding.component';
+import { TestComponent } from './nested-event-binding/test/test.component';
 import { MiliLiterPipe } from './pipes/mili-liter.pipe';
 import { TodoEffects } from './todo-list/todo.effects';
+import { TsClassSubscriptionComponent } from './ts-class-subscription/ts-class-subscription.component';
 import { WebsocketComponent } from './websocket/websocket.component';
 
 @NgModule({
@@ -51,7 +54,10 @@ import { WebsocketComponent } from './websocket/websocket.component';
     IframeComponent,
     EmbeddedPageComponent,
     CustomMatcherComponent,
-    CustomEventTestComponent,
+    TsClassSubscriptionComponent,
+    NestedEventBindingComponent,
+    ComponentDirective,
+    TestComponent,
   ],
   imports: [
     BrowserModule,

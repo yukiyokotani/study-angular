@@ -1,7 +1,8 @@
-import { HostListener, Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 
-import { Item, ItemField } from './item';
+import { Item } from './item';
+import { TestComponent } from './test/test.component';
 
 @Injectable({
   providedIn: 'root',
@@ -23,13 +24,23 @@ export class ItemListService implements OnDestroy {
 
   addItem(message: string): void {
     const current = this.itemListSubject$.getValue();
-    const item = new Item(message);
+    const item = new Item(message, TestComponent);
     this.itemListSubject$.next([...current, item]);
   }
 
-  removeItem(index: number): void {
+  removeItem(id: string): void {
     const current = this.itemListSubject$.getValue();
-    current.filter((_, i) => i !== index);
+    current.filter((item) => item.id !== id);
+    this.itemListSubject$.next([...current]);
+  }
+
+  setMessage(id: string, message: string): void {
+    console.log(id, message);
+    const current = this.itemListSubject$.getValue();
+    const target = current.find((item) => item.id === id);
+    if (target) {
+      target.message = message;
+    }
     this.itemListSubject$.next([...current]);
   }
 
