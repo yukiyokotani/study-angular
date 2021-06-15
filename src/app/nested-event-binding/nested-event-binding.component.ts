@@ -1,14 +1,14 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
-import { Item, ItemField } from './item';
+import { Item } from './item';
 import { ItemListService } from './item-list.service';
 
 @Component({
-  templateUrl: './custom-event-test.component.html',
-  styleUrls: ['./custom-event-test.component.css'],
+  templateUrl: './nested-event-binding.component.html',
+  styleUrls: ['./nested-event-binding.component.css'],
 })
-export class CustomEventTestComponent implements OnInit, OnDestroy {
+export class NestedEventBindingComponent implements OnInit, OnDestroy {
   itemListSubscription: Subscription;
   itemList: Item[] = [];
 
@@ -16,11 +16,17 @@ export class CustomEventTestComponent implements OnInit, OnDestroy {
     this.itemListSubscription = this.itemListService.itemsListChanges.subscribe(
       (itemList) => (this.itemList = itemList)
     );
+    console.log(this.itemListService);
   }
 
   addItem(): void {
+    console.log(this.itemListService);
     this.itemListService.addItem('Hello World');
   }
+
+  setMessage = (id: string, message: string) => {
+    this.itemListService.setMessage(id, message);
+  };
 
   ngOnInit(): void {}
 
