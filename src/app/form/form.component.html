@@ -1,0 +1,131 @@
+<div
+  fxLayout="column wrap"
+  fxLayoutGap="16px"
+  fxLayoutAlign="center"
+  class="container"
+>
+  <mat-card fxFlex="80%" fxFlex.lt-sm="100%">
+    <form [formGroup]="sampleForm" (ngSubmit)="onSubmit()">
+      <mat-card-title>フォーム</mat-card-title>
+      <mat-card-content>
+        <div fxLayout="row wrap" fxLayoutGap="8px">
+          <mat-form-field
+            appearance="outline"
+            fxFlex="calc(20% - 8px)"
+            fxFlex.lt-md="calc(50% - 8px)"
+            fxFlex.lt-sm="100%"
+          >
+            <input
+              matInput
+              placeholder="ユーザー名"
+              id="name"
+              name="name"
+              formControlName="name"
+              [minlength]="6"
+              [maxLength]="12"
+              required
+            />
+            <mat-error
+              *ngIf="sampleForm.touched || sampleForm.dirty || isSubmitted"
+            >
+              <div *ngIf="name?.errors?.required">ユーザー名は必須項目です</div>
+              <div *ngIf="name?.errors?.minlength">
+                6文字以上で入力してください
+              </div>
+              <div *ngIf="name?.errors?.maxLength">
+                12文字以上で入力してください
+              </div>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            fxFlex="calc(20% - 8px)"
+            fxFlex.lt-md="calc(50% - 8px)"
+            fxFlex.lt-sm="100%"
+          >
+            <input
+              type="password"
+              matInput
+              placeholder="パスワード"
+              id="password"
+              name="password"
+              formControlName="password"
+              required
+            />
+            <mat-error *ngIf="isSubmitted">
+              <div *ngIf="password?.errors?.required">
+                パスワードは必須項目です
+              </div>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field
+            appearance="outline"
+            fxFlex="calc(20% - 8px)"
+            fxFlex.lt-md="calc(50% - 8px)"
+            fxFlex.lt-sm="100%"
+          >
+            <input
+              type="password"
+              matInput
+              placeholder="確認用パスワード"
+              id="verifyPassword"
+              name="verifyPassword"
+              formControlName="verifyPassword"
+              [errorStateMatcher]="verifyPasswordFormMatcher"
+              required
+            />
+            <mat-error *ngIf="isSubmitted">
+              <div *ngIf="verifyPassword?.errors?.required">
+                確認用パスワードは必須項目です
+              </div>
+              <div
+                *ngIf="
+                  !verifyPassword?.errors?.required &&
+                  sampleForm.errors?.notMatchPassword
+                "
+              >
+                パスワードが一致しません
+              </div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-stroked-button type="submit" color="primary">
+          <mat-icon aria-hidden="false" aria-label="info icon">send</mat-icon>
+          送信
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+  <mat-card fxFlex="80%" fxFlex.lt-sm="100%">
+    <mat-card-title>フォームの値とパラメータ</mat-card-title>
+    <mat-card-content>
+      <ul>
+        <li>name value: "{{ name?.value }}"</li>
+        <li>password value: "{{ password?.value }}"</li>
+        <li>verifyPassword value: "{{ verifyPassword?.value }}"</li>
+        <li>name valid: {{ name?.valid }}</li>
+        <li>password valid: {{ password?.valid }}</li>
+        <li>verifyPassword valid: {{ verifyPassword?.valid }}</li>
+        <li>name touched: {{ name?.touched }}</li>
+        <li>password touched: {{ password?.touched }}</li>
+        <li>verifyPassword touched: {{ verifyPassword?.touched }}</li>
+        <li>name dirty: {{ name?.dirty }}</li>
+        <li>password dirty: {{ password?.dirty }}</li>
+        <li>verifyPassword dirty: {{ verifyPassword?.dirty }}</li>
+        <li>name length &gt; 6: {{ name?.errors?.minlength === null }}</li>
+        <li>name length &lt; 12: {{ name?.errors?.maxlength === null }}</li>
+        <li>form password match: {{ !sampleForm.errors?.notMatchPassword }}</li>
+        <li>form isSubmitted: {{ isSubmitted }}</li>
+        <li>form status: {{ sampleForm?.status }}</li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+  <mat-card fxFlex="80%" fxFlex.lt-sm="100%">
+    <mat-card-title>送信された値</mat-card-title>
+    <mat-card-content>
+      <code>{{ submittedData }}</code>
+    </mat-card-content>
+  </mat-card>
+</div>

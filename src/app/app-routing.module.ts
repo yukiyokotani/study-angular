@@ -25,6 +25,10 @@ const routes: Routes = [
       import('./lazy-load/lazy-load.module').then((m) => m.LazyLoadModule),
   },
   {
+    path: 'form',
+    loadChildren: () => import('./form/form.module').then((m) => m.FormModule),
+  },
+  {
     path: 'websocket',
     component: WebsocketComponent,
   },
