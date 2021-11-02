@@ -1,7 +1,4 @@
-.container {
+:host {
+  justify-content: center;
   margin: 16px;
-  
-  .button-container {
-    text-align: right;
-  }
 }
