@@ -35,8 +35,8 @@ export class FormComponent {
     this.nameControl = new FormControl('', {
       validators: [
         Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(8),
+        Validators.minLength(6),
+        Validators.maxLength(12),
       ],
       updateOn: 'blur',
     });
