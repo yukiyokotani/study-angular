@@ -1,4 +1,4 @@
-import { DecimalPipe, ɵgetDOM as getDOM } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
 import {
   Directive,
   HostListener,
