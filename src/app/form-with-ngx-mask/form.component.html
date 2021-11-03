@@ -1,0 +1,320 @@
+<div
+  fxLayout="column"
+  fxLayoutGap="16px"
+  fxLayoutAlign="center"
+  class="container"
+  fxFlex="80%"
+  fxFlex.lt-sm="100%"
+>
+  <div>
+    <form [formGroup]="sampleForm" (ngSubmit)="onSubmit()">
+      <mat-card>
+        <mat-card-title>フォーム</mat-card-title>
+        <mat-card-subtitle>
+          バリデーションの制御を加えたフォームのサンプル
+        </mat-card-subtitle>
+        <mat-card-content>
+          <ul>
+            <li>ユーザー名は6文字以上12文字以内</li>
+            <li>
+              ユーザー名は入力値から次の文字を取り除き、先頭末尾の空白文字をトリムする
+              [,.-^/\]
+            </li>
+            <li>ユーザー名はblurでformControlに値がセットされる</li>
+            <li>パスワードはsubmitでformControlに値がセットされる</li>
+          </ul>
+          <div fxLayout="row wrap" fxLayoutGap="8px grid">
+            <mat-form-field
+              appearance="fill"
+              fxFlex="calc(33% - 8px)"
+              fxFlex.lt-md="calc(50% - 8px)"
+              fxFlex.lt-sm="100%"
+            >
+              <mat-label>ユーザー名</mat-label>
+              <input
+                matInput
+                placeholder="ユーザー名"
+                id="name"
+                name="name"
+                formControlName="name"
+                [minlength]="6"
+                [maxLength]="12"
+                required
+              />
+              <mat-error
+                *ngIf="sampleForm.touched || sampleForm.dirty || isSubmitted"
+              >
+                <div *ngIf="name?.errors?.required">
+                  ユーザー名は必須項目です
+                </div>
+                <div *ngIf="name?.errors?.minlength">
+                  6文字以上で入力してください
+                </div>
+                <div *ngIf="name?.errors?.maxLength">
+                  12文字以内で入力してください
+                </div>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field
+              appearance="fill"
+              fxFlex="calc(33% - 8px)"
+              fxFlex.lt-md="calc(50% - 8px)"
+              fxFlex.lt-sm="100%"
+            >
+              <mat-label>パスワード</mat-label>
+              <input
+                type="password"
+                matInput
+                placeholder="パスワード"
+                id="password"
+                name="password"
+                formControlName="password"
+                required
+              />
+              <mat-error *ngIf="isSubmitted">
+                <div *ngIf="password?.errors?.required">
+                  パスワードは必須項目です
+                </div>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field
+              appearance="fill"
+              fxFlex="calc(33% - 8px)"
+              fxFlex.lt-md="calc(50% - 8px)"
+              fxFlex.lt-sm="100%"
+            >
+              <mat-label>確認用パスワード</mat-label>
+              <input
+                type="password"
+                matInput
+                placeholder="確認用パスワード"
+                id="verifyPassword"
+                name="verifyPassword"
+                formControlName="verifyPassword"
+                [errorStateMatcher]="verifyPasswordFormMatcher"
+                required
+              />
+              <mat-error *ngIf="isSubmitted">
+                <div *ngIf="verifyPassword?.errors?.required">
+                  確認用パスワードは必須項目です
+                </div>
+                <div
+                  *ngIf="
+                    !verifyPassword?.errors?.required &&
+                    sampleForm.errors?.notMatchPassword
+                  "
+                >
+                  パスワードが一致しません
+                </div>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field
+              appearance="fill"
+              fxFlex="calc(33% - 8px)"
+              fxFlex.lt-md="calc(50% - 8px)"
+              fxFlex.lt-sm="100%"
+            >
+              <mat-label>誕生日</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="誕生日"
+                id="birthday"
+                name="birthday"
+                formControlName="birthday"
+                required
+                mask="0000/00/00"
+                [showMaskTyped]="true"
+                [dropSpecialCharacters]="true"
+              />
+              <mat-error
+                *ngIf="sampleForm.touched || sampleForm.dirty || isSubmitted"
+              >
+                <div *ngIf="birthday?.errors?.required">
+                  誕生日は必須項目です
+                </div>
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field
+              appearance="fill"
+              fxFlex="calc(33% - 8px)"
+              fxFlex.lt-md="calc(50% - 8px)"
+              fxFlex.lt-sm="100%"
+            >
+              <mat-label>貯金額</mat-label>
+              <input
+                type="tel"
+                matInput
+                placeholder="貯金額"
+                id="savings"
+                name="savings"
+                formControlName="savings"
+                required
+                mask="separator.2"
+                thousandSeparator=","
+                [dropSpecialCharacters]="true"
+              />
+              <mat-error
+                *ngIf="sampleForm.touched || sampleForm.dirty || isSubmitted"
+              >
+                <div *ngIf="savings?.errors?.required">
+                  貯金額は必須項目です
+                </div>
+                <div *ngIf="savings?.errors?.min">
+                  貯金額は0以上の数値を入力してください
+                </div>
+                <div *ngIf="savings?.errors?.max">
+                  貯金額は1,000,000,000以下の数値を入力してください
+                </div>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button mat-stroked-button type="submit" color="primary">
+            <mat-icon aria-hidden="false" aria-label="info icon">send</mat-icon>
+            送信
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </div>
+  <mat-card>
+    <mat-card-title>フォームと各パラメータの状態</mat-card-title>
+    <mat-card-content>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>項目</th>
+            <th>パラメータ</th>
+            <th>値</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="6">ユーザー名</td>
+            <td>値</td>
+            <td>"{{ name?.value }}"</td>
+          </tr>
+          <tr>
+            <td>valid</td>
+            <td>{{ name?.valid }}</td>
+          </tr>
+          <tr>
+            <td>touched</td>
+            <td>{{ name?.touched }}</td>
+          </tr>
+          <tr>
+            <td>dirty</td>
+            <td>{{ name?.dirty }}</td>
+          </tr>
+          <tr>
+            <td>length &gt;= 6</td>
+            <td>{{ name?.errors?.minlength === null }}</td>
+          </tr>
+          <tr>
+            <td>length &lt;= 12</td>
+            <td>{{ name?.errors?.maxlength === null }}</td>
+          </tr>
+          <tr>
+            <td rowspan="4">パスワード</td>
+            <td>値</td>
+            <td>"{{ password?.value }}"</td>
+          </tr>
+          <tr>
+            <td>valid</td>
+            <td>{{ password?.valid }}</td>
+          </tr>
+          <tr>
+            <td>touched</td>
+            <td>{{ password?.touched }}</td>
+          </tr>
+          <tr>
+            <td>dirty</td>
+            <td>{{ password?.dirty }}</td>
+          </tr>
+          <tr>
+            <td rowspan="5">確認用パスワード</td>
+            <td>値</td>
+            <td>"{{ verifyPassword?.value }}"</td>
+          </tr>
+          <tr>
+            <td>valid</td>
+            <td>{{ verifyPassword?.valid }}</td>
+          </tr>
+          <tr>
+            <td>touched</td>
+            <td>{{ verifyPassword?.touched }}</td>
+          </tr>
+          <tr>
+            <td>dirty</td>
+            <td>{{ verifyPassword?.dirty }}</td>
+          </tr>
+          <tr>
+            <td>パスワードとの一致</td>
+            <td>{{ !sampleForm.errors?.notMatchPassword }}</td>
+          </tr>
+          <tr>
+            <td rowspan="4">誕生日</td>
+            <td>値</td>
+            <td>"{{ birthday?.value }}"</td>
+          </tr>
+          <tr>
+            <td>valid</td>
+            <td>{{ birthday?.valid }}</td>
+          </tr>
+          <tr>
+            <td>touched</td>
+            <td>{{ birthday?.touched }}</td>
+          </tr>
+          <tr>
+            <td>dirty</td>
+            <td>{{ birthday?.dirty }}</td>
+          </tr>
+          <tr>
+            <td rowspan="6">貯金額</td>
+            <td>値</td>
+            <td>"{{ savings?.value }}"</td>
+          </tr>
+          <tr>
+            <td>valid</td>
+            <td>{{ savings?.valid }}</td>
+          </tr>
+          <tr>
+            <td>touched</td>
+            <td>{{ savings?.touched }}</td>
+          </tr>
+          <tr>
+            <td>dirty</td>
+            <td>{{ savings?.dirty }}</td>
+          </tr>
+          <tr>
+            <td>&gt;= 0</td>
+            <td>{{ savings?.errors?.min === null }}</td>
+          </tr>
+          <tr>
+            <td>&lt;= 1,000,000,000</td>
+            <td>{{ savings?.errors?.max === null }}</td>
+          </tr>
+          <tr>
+            <td rowspan="2">フォーム全体</td>
+            <td>送信済み</td>
+            <td>{{ isSubmitted }}</td>
+          </tr>
+          <tr>
+            <td>状態</td>
+            <td>{{ sampleForm?.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-title>送信された値</mat-card-title>
+    <mat-card-content>
+      <div class="submitted-data">
+        <code>{{ submittedData }}</code>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

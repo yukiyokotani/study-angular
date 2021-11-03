@@ -29,6 +29,11 @@ const routes: Routes = [
     loadChildren: () => import('./form/form.module').then((m) => m.FormModule),
   },
   {
+    path: 'form-with-ngx-mask',
+    loadChildren: () =>
+      import('./form-with-ngx-mask/form.module').then((m) => m.FormModule),
+  },
+  {
     path: 'websocket',
     component: WebsocketComponent,
   },
