@@ -12,9 +12,19 @@ import { TodoListRoutingModule } from '../todo-list/todo-list-routing.module';
 
 import { FormRoutingModule } from './form-routing.module';
 import { FormComponent } from './form.component';
+import { TrimDateDirective } from './trim-date.directive';
+import { TrimNumberDirective } from './trim-number.directive';
+import { TrimValueDirective } from './trim-value.directive';
+import { TrimCustomValueDirective } from './trimu-custom-value.directive';
 
 @NgModule({
-  declarations: [FormComponent],
+  declarations: [
+    FormComponent,
+    TrimValueDirective,
+    TrimCustomValueDirective,
+    TrimNumberDirective,
+    TrimDateDirective,
+  ],
   imports: [
     CommonModule,
     FormRoutingModule,
