@@ -7,7 +7,6 @@ import {
   Input,
   Renderer2,
   ElementRef,
-  Optional,
   Inject,
 } from '@angular/core';
 import {
