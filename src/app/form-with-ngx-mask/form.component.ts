@@ -31,10 +31,10 @@ export class FormComponent {
   public birthdayControl: FormControl;
   public savingsControl: FormControl;
 
-  /** ErrorStateMatcherの定義 */
+  /** CrossField Validationを反映させるための、ErrorStateMatcherの定義 */
   verifyPasswordFormMatcher = new VerifyPasswordFormErrorStateMatcher();
 
-  /** trim対象 */
+  /** trim対象文字 */
   trimPattern = [/\-/g, /\^/g, /,/g, /\./g, /\\/g, /\//g];
 
   constructor() {
@@ -82,6 +82,7 @@ export class FormComponent {
   }
 
   public onSubmit(): void {
+    console.log(this.sampleForm);
     this.isSubmitted = true;
     if (this.sampleForm.invalid) return;
     this.submittedData = JSON.stringify(this.sampleForm.value);
