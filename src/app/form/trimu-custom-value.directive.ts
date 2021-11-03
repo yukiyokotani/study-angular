@@ -14,9 +14,10 @@ const TRIM_VALUE_ACCESSOR: Provider = {
 };
 
 /**
- * The trim accessor for writing trimmed value and listening to changes that is
- * used by the {@link NgModel}, {@link FormControlDirective}, and
- * {@link FormControlName} directives.
+ * 文字入力フォームのためのValueAccessorDirective。
+ * 入力中は通常通りの動作で、blurのタイミングでDirective引数に渡した正規表現のパターンをトリミングする。
+ * 先頭末尾の空白文字についてはデフォルトでトリミングする。
+ * {@link https://https://github.com/khashayar/ng-trim-value-accessor/blob/master/src/trim-value-accessor.ts.com ベース実装}
  */
 @Directive({
   selector: `[appTrimCustomValue]`,
@@ -28,7 +29,7 @@ export class TrimCustomValueDirective extends DefaultValueAccessor {
 
   @HostListener('input', ['$event.target.value'])
   ngOnChange = (val: string) => {
-    console.log('change', val);
+    // console.log('change', val);
     let trimmedVal = val;
     if (this.appTrimCustomValue) {
       this.appTrimCustomValue.forEach((pattern) => {
@@ -40,7 +41,7 @@ export class TrimCustomValueDirective extends DefaultValueAccessor {
 
   @HostListener('blur', ['$event.target.value'])
   ngOnBlur = (val: string) => {
-    console.log('blur', val);
+    // console.log('blur', val);
     let trimmedVal = val;
     if (this.appTrimCustomValue) {
       this.appTrimCustomValue.forEach((pattern) => {
@@ -52,18 +53,11 @@ export class TrimCustomValueDirective extends DefaultValueAccessor {
   };
 
   writeValue(value: any): void {
-    console.log('writeValue', value);
+    // console.log('writeValue', value);
     if (typeof value === 'string') {
-      let trimmedVal = value;
-      if (this.appTrimCustomValue) {
-        this.appTrimCustomValue.forEach((pattern) => {
-          trimmedVal = trimmedVal.replace(pattern, '');
-        });
-      }
-      trimmedVal = trimmedVal.trim();
-      super.writeValue(trimmedVal);
-      return;
+      value = value.trim();
     }
+
     super.writeValue(value);
   }
 }
