@@ -50,18 +50,11 @@ export class TrimDateDirective extends DefaultValueAccessor {
   };
 
   writeValue(value: any): void {
+    // console.log('writeValue', value);
     if (typeof value === 'string') {
-      let trimmedVal = value;
-      if (this.appTrimDate) {
-        this.appTrimDate.forEach((pattern) => {
-          trimmedVal = trimmedVal.replace(pattern, '');
-        });
-      }
-
-      trimmedVal = trimmedVal.trim();
-      super.writeValue(value);
-      return;
+      value = value.trim();
     }
+
     super.writeValue(value);
   }
 }
