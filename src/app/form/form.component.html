@@ -117,15 +117,20 @@
             >
               <mat-label>誕生日</mat-label>
               <input
-                type="birthday"
+                type="text"
                 matInput
                 placeholder="誕生日"
                 id="birthday"
                 name="birthday"
                 formControlName="birthday"
                 required
-                [appTrimDate]="trimPattern"
+                [matDatepicker]="picker"
               />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
               <mat-error
                 *ngIf="sampleForm.touched || sampleForm.dirty || isSubmitted"
               >
@@ -142,7 +147,7 @@
             >
               <mat-label>貯金額</mat-label>
               <input
-                type="savings"
+                type="tel"
                 matInput
                 placeholder="貯金額"
                 id="savings"
@@ -295,7 +300,9 @@
   <mat-card>
     <mat-card-title>送信された値</mat-card-title>
     <mat-card-content>
-      <code>{{ submittedData }}</code>
+      <div class="submitted-data">
+        <code>{{ submittedData }}</code>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>

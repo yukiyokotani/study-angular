@@ -57,9 +57,8 @@ export class TrimDateDirective extends DefaultValueAccessor {
           trimmedVal = trimmedVal.replace(pattern, '');
         });
       }
-
       trimmedVal = trimmedVal.trim();
-      super.writeValue(value);
+      super.writeValue(trimmedVal);
       return;
     }
     super.writeValue(value);

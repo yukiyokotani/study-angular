@@ -28,6 +28,7 @@ export class TrimCustomValueDirective extends DefaultValueAccessor {
 
   @HostListener('input', ['$event.target.value'])
   ngOnChange = (val: string) => {
+    console.log('change', val);
     let trimmedVal = val;
     if (this.appTrimCustomValue) {
       this.appTrimCustomValue.forEach((pattern) => {
@@ -39,6 +40,7 @@ export class TrimCustomValueDirective extends DefaultValueAccessor {
 
   @HostListener('blur', ['$event.target.value'])
   ngOnBlur = (val: string) => {
+    console.log('blur', val);
     let trimmedVal = val;
     if (this.appTrimCustomValue) {
       this.appTrimCustomValue.forEach((pattern) => {
@@ -50,6 +52,7 @@ export class TrimCustomValueDirective extends DefaultValueAccessor {
   };
 
   writeValue(value: any): void {
+    console.log('writeValue', value);
     if (typeof value === 'string') {
       let trimmedVal = value;
       if (this.appTrimCustomValue) {
@@ -57,9 +60,8 @@ export class TrimCustomValueDirective extends DefaultValueAccessor {
           trimmedVal = trimmedVal.replace(pattern, '');
         });
       }
-
       trimmedVal = trimmedVal.trim();
-      super.writeValue(value);
+      super.writeValue(trimmedVal);
       return;
     }
     super.writeValue(value);
