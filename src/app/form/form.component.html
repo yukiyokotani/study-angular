@@ -162,6 +162,12 @@
                 <div *ngIf="savings?.errors?.required">
                   貯金額は必須項目です
                 </div>
+                <div *ngIf="savings?.errors?.min">
+                  貯金額は0以上の数値を入力してください
+                </div>
+                <div *ngIf="savings?.errors?.max">
+                  貯金額は1,000,000,000以下の数値を入力してください
+                </div>
               </mat-error>
             </mat-form-field>
           </div>
@@ -205,11 +211,11 @@
             <td>{{ name?.dirty }}</td>
           </tr>
           <tr>
-            <td>length &gt; 6</td>
+            <td>length &gt;= 6</td>
             <td>{{ name?.errors?.minlength === null }}</td>
           </tr>
           <tr>
-            <td>length &lt; 12</td>
+            <td>length &lt;= 12</td>
             <td>{{ name?.errors?.maxlength === null }}</td>
           </tr>
           <tr>
@@ -268,7 +274,7 @@
             <td>{{ birthday?.dirty }}</td>
           </tr>
           <tr>
-            <td rowspan="4">貯金額</td>
+            <td rowspan="6">貯金額</td>
             <td>値</td>
             <td>"{{ savings?.value }}"</td>
           </tr>
@@ -283,6 +289,14 @@
           <tr>
             <td>dirty</td>
             <td>{{ savings?.dirty }}</td>
+          </tr>
+          <tr>
+            <td>&gt;= 0</td>
+            <td>{{ savings?.errors?.min === null }}</td>
+          </tr>
+          <tr>
+            <td>&lt;= 1,000,000,000</td>
+            <td>{{ savings?.errors?.max === null }}</td>
           </tr>
           <tr>
             <td rowspan="2">フォーム全体</td>

@@ -61,7 +61,7 @@ export class FormComponent {
       validators: [
         Validators.required,
         Validators.min(0),
-        Validators.max(100000000),
+        Validators.max(1000000000),
       ],
       updateOn: 'blur',
     });
