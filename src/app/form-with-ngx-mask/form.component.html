@@ -133,6 +133,9 @@
                 <div *ngIf="birthday?.errors?.required">
                   誕生日は必須項目です
                 </div>
+                <div *ngIf="birthday?.errors?.invalidDate">
+                  存在する日付を入力してください
+                </div>
               </mat-error>
             </mat-form-field>
             <mat-form-field

@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 
 import {
+  dateValidator,
   matchPasswordValidator,
   VerifyPasswordFormErrorStateMatcher,
 } from './cutom-validators';
@@ -54,7 +55,7 @@ export class FormComponent {
       updateOn: 'submit',
     });
     this.birthdayControl = new FormControl('', {
-      validators: [Validators.required],
+      validators: [Validators.required, dateValidator],
       updateOn: 'blur',
     });
     this.savingsControl = new FormControl('', {
