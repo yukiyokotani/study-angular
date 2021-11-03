@@ -9,20 +9,52 @@
   <div>
     <form [formGroup]="sampleForm" (ngSubmit)="onSubmit()">
       <mat-card>
-        <mat-card-title>フォーム</mat-card-title>
+        <mat-card-title>サンプルフォーム</mat-card-title>
         <mat-card-subtitle>
-          バリデーションの制御を加えたフォームのサンプル
+          バリデーションのタイミング制御と値のマスキングを実装したフォーム
         </mat-card-subtitle>
         <mat-card-content>
+          <p>概要</p>
           <ul>
-            <li>ユーザー名は6文字以上12文字以内</li>
+            <li>Custom Validatotion</li>
+            <ul>
+              <li>
+                誕生日のフォームで「有効な日付かどうか」の判定に対して実装。
+              </li>
+            </ul>
+            <li>Cross-field Validation</li>
+            <ul>
+              <li>
+                「パスワードと確認用パスワードが一致しているかどうか」の判定に対して実装。
+              </li>
+            </ul>
             <li>
-              ユーザー名は入力値から次の文字を取り除き、先頭末尾の空白文字をトリムする
-              [,.-^/\]
+              テキストのトリミング
+              <ul>
+                <li>ユーザー名のフォームに自作したDirectiveで実装</li>
+                <li>
+                  Directiveは入力値から次の文字を取り除き、先頭末尾の空白文字をトリムする。
+                  [,.-^/\] (設定可能)
+                </li>
+              </ul>
             </li>
-            <li>ユーザー名はblurでformControlに値がセットされる</li>
-            <li>パスワードはsubmitでformControlに値がセットされる</li>
+            <li>日付のマスキング</li>
+            <ul>
+              <li>誕生日のフォームに対して実装。</li>
+              <li>
+                表示上は /
+                が表示されるが、formControlへセットされる値からは除かれる。(設定可能)
+              </li>
+            </ul>
+            <li>数値のマスキング</li>
+            <ul>
+              <li>貯金額のフォームに対して実装。</li>
+              <li>
+                表示上は千区切りのカンマが表示されるが、formControlへセットされる値からは除かれる。(設定可能)
+              </li>
+            </ul>
           </ul>
+          <mat-divider inset></mat-divider>
           <div fxLayout="row wrap" fxLayoutGap="8px grid">
             <mat-form-field
               appearance="fill"
@@ -40,6 +72,7 @@
                 [minlength]="6"
                 [maxLength]="12"
                 required
+                [appTrimValue]="trimPattern"
               />
               <mat-error
                 *ngIf="sampleForm.touched || sampleForm.dirty || isSubmitted"
@@ -133,7 +166,11 @@
                 <div *ngIf="birthday?.errors?.required">
                   誕生日は必須項目です
                 </div>
-                <div *ngIf="birthday?.errors?.invalidDate">
+                <div
+                  *ngIf="
+                    !birthday?.errors?.required && birthday?.errors?.invalidDate
+                  "
+                >
                   存在する日付を入力してください
                 </div>
               </mat-error>
@@ -174,7 +211,7 @@
           </div>
         </mat-card-content>
         <mat-card-actions align="end">
-          <button mat-stroked-button type="submit" color="primary">
+          <button mat-flat-button type="submit" color="primary">
             <mat-icon aria-hidden="false" aria-label="info icon">send</mat-icon>
             送信
           </button>
@@ -182,8 +219,9 @@
       </mat-card>
     </form>
   </div>
+  <!-- 以下サンプルの補足事項 -->
   <mat-card>
-    <mat-card-title>フォームと各パラメータの状態</mat-card-title>
+    <mat-card-title>FormGroupとFormControlの各パラメータの状態</mat-card-title>
     <mat-card-content>
       <table border="1">
         <thead>
@@ -195,7 +233,10 @@
         </thead>
         <tbody>
           <tr>
-            <td rowspan="6">ユーザー名</td>
+            <td rowspan="6">
+              <div><b>ユーザー名</b></div>
+              <div>blurで更新</div>
+            </td>
             <td>値</td>
             <td>"{{ name?.value }}"</td>
           </tr>
@@ -213,14 +254,27 @@
           </tr>
           <tr>
             <td>length &gt;= 6</td>
-            <td>{{ name?.errors?.minlength === null }}</td>
+            <td>
+              {{
+                name?.errors?.minlength === null ||
+                  name?.errors?.minlength === undefined
+              }}
+            </td>
           </tr>
           <tr>
             <td>length &lt;= 12</td>
-            <td>{{ name?.errors?.maxlength === null }}</td>
+            <td>
+              {{
+                name?.errors?.maxlength === null ||
+                  name?.errors?.maxlength === undefined
+              }}
+            </td>
           </tr>
           <tr>
-            <td rowspan="4">パスワード</td>
+            <td rowspan="4">
+              <div><b>パスワード</b></div>
+              <div>submitで更新</div>
+            </td>
             <td>値</td>
             <td>"{{ password?.value }}"</td>
           </tr>
@@ -237,7 +291,10 @@
             <td>{{ password?.dirty }}</td>
           </tr>
           <tr>
-            <td rowspan="5">確認用パスワード</td>
+            <td rowspan="5">
+              <div><b>確認用パスワード</b></div>
+              <div>submitで更新</div>
+            </td>
             <td>値</td>
             <td>"{{ verifyPassword?.value }}"</td>
           </tr>
@@ -258,7 +315,10 @@
             <td>{{ !sampleForm.errors?.notMatchPassword }}</td>
           </tr>
           <tr>
-            <td rowspan="4">誕生日</td>
+            <td rowspan="4">
+              <div><b>誕生日</b></div>
+              <div>blurで更新</div>
+            </td>
             <td>値</td>
             <td>"{{ birthday?.value }}"</td>
           </tr>
@@ -275,7 +335,10 @@
             <td>{{ birthday?.dirty }}</td>
           </tr>
           <tr>
-            <td rowspan="6">貯金額</td>
+            <td rowspan="6">
+              <div><b>貯金額</b></div>
+              <div>blurで更新</div>
+            </td>
             <td>値</td>
             <td>"{{ savings?.value }}"</td>
           </tr>
@@ -293,14 +356,24 @@
           </tr>
           <tr>
             <td>&gt;= 0</td>
-            <td>{{ savings?.errors?.min === null }}</td>
+            <td>
+              {{
+                savings?.errors?.min === null ||
+                  savings?.errors?.min === undefined
+              }}
+            </td>
           </tr>
           <tr>
             <td>&lt;= 1,000,000,000</td>
-            <td>{{ savings?.errors?.max === null }}</td>
+            <td>
+              {{
+                savings?.errors?.max === null ||
+                  savings?.errors?.max === undefined
+              }}
+            </td>
           </tr>
           <tr>
-            <td rowspan="2">フォーム全体</td>
+            <td rowspan="2"><b>フォーム全体</b></td>
             <td>送信済み</td>
             <td>{{ isSubmitted }}</td>
           </tr>

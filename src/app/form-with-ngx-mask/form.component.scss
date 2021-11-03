@@ -2,25 +2,33 @@
   justify-content: center;
   margin: 16px;
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px #777;
+  .container {
+    margin-bottom: 32px;
 
-    tr:nth-child(odd) {
-      background-color: #eee; /* 背景色指定 */
+    mat-divider {
+      margin-bottom: 16px;
     }
 
-    thead {
-      border-bottom: 3px double #777;
-      th {
-        width: 33.3%;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px #777;
+
+      tr:nth-child(odd) {
+        background-color: #eee; /* 背景色指定 */
+      }
+
+      thead {
+        border-bottom: 3px double #777;
+        th {
+          width: 33.3%;
+        }
       }
     }
-  }
 
-  .submitted-data {
-    width: 100%;
-    overflow: scroll;
+    .submitted-data {
+      width: 100%;
+      overflow: scroll;
+    }
   }
 }

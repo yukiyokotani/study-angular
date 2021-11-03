@@ -173,7 +173,7 @@
           </div>
         </mat-card-content>
         <mat-card-actions align="end">
-          <button mat-stroked-button type="submit" color="primary">
+          <button mat-flat-button type="submit" color="primary">
             <mat-icon aria-hidden="false" aria-label="info icon">send</mat-icon>
             送信
           </button>
@@ -182,7 +182,7 @@
     </form>
   </div>
   <mat-card>
-    <mat-card-title>フォームと各パラメータの状態</mat-card-title>
+    <mat-card-title>FormGroupとFormControlの各パラメータの状態</mat-card-title>
     <mat-card-content>
       <table border="1">
         <thead>
@@ -212,11 +212,21 @@
           </tr>
           <tr>
             <td>length &gt;= 6</td>
-            <td>{{ name?.errors?.minlength === null }}</td>
+            <td>
+              {{
+                name?.errors?.minlength === null ||
+                  name?.errors?.minlength === undefined
+              }}
+            </td>
           </tr>
           <tr>
             <td>length &lt;= 12</td>
-            <td>{{ name?.errors?.maxlength === null }}</td>
+            <td>
+              {{
+                name?.errors?.maxlength === null ||
+                  name?.errors?.maxlength === undefined
+              }}
+            </td>
           </tr>
           <tr>
             <td rowspan="4">パスワード</td>
@@ -292,11 +302,21 @@
           </tr>
           <tr>
             <td>&gt;= 0</td>
-            <td>{{ savings?.errors?.min === null }}</td>
+            <td>
+              {{
+                savings?.errors?.min === null ||
+                  savings?.errors?.min === undefined
+              }}
+            </td>
           </tr>
           <tr>
             <td>&lt;= 1,000,000,000</td>
-            <td>{{ savings?.errors?.max === null }}</td>
+            <td>
+              {{
+                savings?.errors?.max === null ||
+                  savings?.errors?.max === undefined
+              }}
+            </td>
           </tr>
           <tr>
             <td rowspan="2">フォーム全体</td>
