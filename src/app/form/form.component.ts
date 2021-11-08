@@ -5,11 +5,17 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 import {
+  DateFormErrorStateMatcher,
+  dateValidator,
   matchPasswordValidator,
   VerifyPasswordFormErrorStateMatcher,
 } from './cutom-validators';
+
+// From native date adapter in Angualr Material
+export const ISO_8601_REGEX = /^(\d{4})-(\d{2})-(\d{2})(?:T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|(?:(?:\+|-)\d{2}:\d{2}))?)?$/;
 
 @Component({
   selector: 'app-form',
@@ -31,7 +37,8 @@ export class FormComponent {
   public savingsControl: FormControl;
 
   /** ErrorStateMatcherの定義 */
-  verifyPasswordFormMatcher = new VerifyPasswordFormErrorStateMatcher();
+  verifyPasswordFormErrorMatcher = new VerifyPasswordFormErrorStateMatcher();
+  birthdayFormErrorMathcer = new DateFormErrorStateMatcher();
 
   /** trim対象 */
   trimPattern = [/\-/g, /\^/g, /,/g, /\./g, /\\/g, /\//g];
@@ -54,7 +61,7 @@ export class FormComponent {
       updateOn: 'submit',
     });
     this.birthdayControl = new FormControl('', {
-      validators: [Validators.required],
+      validators: [Validators.required, dateValidator],
       updateOn: 'blur',
     });
     this.savingsControl = new FormControl('', {
@@ -80,10 +87,52 @@ export class FormComponent {
     );
   }
 
+  public dateChangeHandler = (event: MatDatepickerInputEvent<Date>) => {
+    console.log('change', (event.targetElement as HTMLInputElement).value);
+    const isValid = this.validateUserInput(
+      (event.targetElement as HTMLInputElement).value
+    );
+    const dateString = isValid
+      ? this.formatISODate(event.target.value?.toISOString() ?? '0000/00/00')
+      : '0000/00/00'; // 存在しない日付
+    this.birthday?.patchValue(dateString);
+  };
+
+  public dateInputHandler = (event: MatDatepickerInputEvent<Date>) => {
+    console.log('input', (event.targetElement as HTMLInputElement).value);
+    if (!event.target.value) return;
+    const dateString = this.formatISODate(event.target.value?.toISOString());
+    this.birthday?.patchValue(dateString);
+  };
+
+  // Assumes YYYY/M/D input is only valid
+  validateUserInput(value: string): boolean {
+    const [year, month, day] = value.split('/');
+    if (
+      year?.length === 4 &&
+      (month?.length === 1 || month?.length === 2) &&
+      (day?.length === 1 || day?.length === 2)
+    ) {
+      return true;
+    }
+    return false;
+  }
+
   public onSubmit(): void {
     this.isSubmitted = true;
     if (this.sampleForm.invalid) return;
     this.submittedData = JSON.stringify(this.sampleForm.value);
+  }
+
+  private formatISODate(value: string): string | null {
+    if (ISO_8601_REGEX.test(value)) {
+      const date = new Date(value);
+      if (!isNaN(date.getTime())) {
+        date.setMinutes(date.getMinutes() + 540);
+        return date?.toISOString().replace(ISO_8601_REGEX, `$1/$2/$3`);
+      }
+    }
+    return value;
   }
 
   get name(): AbstractControl | null {

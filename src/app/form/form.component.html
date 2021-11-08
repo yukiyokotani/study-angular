@@ -92,7 +92,7 @@
                 id="verifyPassword"
                 name="verifyPassword"
                 formControlName="verifyPassword"
-                [errorStateMatcher]="verifyPasswordFormMatcher"
+                [errorStateMatcher]="verifyPasswordFormErrorMatcher"
                 required
               />
               <mat-error *ngIf="isSubmitted">
@@ -122,10 +122,13 @@
                 placeholder="誕生日"
                 id="birthday"
                 name="birthday"
-                formControlName="birthday"
                 required
                 [matDatepicker]="picker"
+                [errorStateMatcher]="birthdayFormErrorMathcer"
+                (dateChange)="dateChangeHandler($event)"
+                (dateInput)="dateInputHandler($event)"
               />
+              <input type="hidden" formControlName="birthday" />
               <mat-datepicker-toggle
                 matSuffix
                 [for]="picker"

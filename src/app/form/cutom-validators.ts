@@ -7,6 +7,7 @@ import {
   ValidatorFn,
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import * as dayjs from 'dayjs';
 
 export const matchPasswordValidator: ValidatorFn = (
   control: AbstractControl
@@ -30,6 +31,40 @@ export class VerifyPasswordFormErrorStateMatcher implements ErrorStateMatcher {
       control !== null &&
       (control.errors !== null ||
         (form?.form?.errors?.notMatchPassword ?? false))
+    );
+  }
+}
+
+export const dateValidator: ValidatorFn = (
+  control: AbstractControl
+): ValidationErrors | null => {
+  const format = 'YYYY/MM/DD';
+  const date = control.value;
+  const isValid =
+    typeof date === 'string' && dayjs(date, format).format(format) === date;
+  return isValid ? null : { invalidDate: true };
+};
+
+export class DateFormErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
+    const isSubmitted = form && form.submitted;
+    console.log(
+      form,
+      (isSubmitted === true ||
+        control?.touched === true ||
+        control?.dirty === true) &&
+        (form?.form?.controls?.birthday?.errors !== null ||
+          form?.form?.controls?.birthday?.errors !== undefined)
+    );
+    return (
+      (isSubmitted === true ||
+        control?.touched === true ||
+        control?.dirty === true) &&
+      (form?.form?.controls?.birthday?.errors !== null ||
+        form?.form?.controls?.birthday?.errors !== undefined)
     );
   }
 }
