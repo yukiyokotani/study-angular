@@ -44,27 +44,3 @@ export const dateValidator: ValidatorFn = (
     typeof date === 'string' && dayjs(date, format).format(format) === date;
   return isValid ? null : { invalidDate: true };
 };
-
-export class DateFormErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(
-    control: FormControl | null,
-    form: FormGroupDirective | NgForm | null
-  ): boolean {
-    const isSubmitted = form && form.submitted;
-    console.log(
-      form,
-      (isSubmitted === true ||
-        control?.touched === true ||
-        control?.dirty === true) &&
-        (form?.form?.controls?.birthday?.errors !== null ||
-          form?.form?.controls?.birthday?.errors !== undefined)
-    );
-    return (
-      (isSubmitted === true ||
-        control?.touched === true ||
-        control?.dirty === true) &&
-      (form?.form?.controls?.birthday?.errors !== null ||
-        form?.form?.controls?.birthday?.errors !== undefined)
-    );
-  }
-}

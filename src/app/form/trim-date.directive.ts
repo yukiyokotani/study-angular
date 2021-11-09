@@ -6,6 +6,7 @@ import {
   Input,
 } from '@angular/core';
 import { DefaultValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { current } from 'immer';
 
 const TRIM_VALUE_ACCESSOR: Provider = {
   provide: NG_VALUE_ACCESSOR,
@@ -23,16 +24,47 @@ const TRIM_VALUE_ACCESSOR: Provider = {
   providers: [TRIM_VALUE_ACCESSOR],
 })
 export class TrimDateDirective extends DefaultValueAccessor {
+  private needEscapeCharacters = [
+    '/',
+    '\\',
+    "'",
+    '"',
+    '.',
+    '*',
+    '+',
+    '?',
+    '^',
+    '$',
+    '-',
+    '|',
+    '(',
+    ')',
+    '{',
+    '}',
+    '{',
+    '}',
+  ];
+
   /** trimしたいパターンのリスト */
-  @Input() appTrimDate?: RegExp[];
+  private _trimPattern?: RegExp;
+  @Input() set appTrimDate(trimPattern: string[]) {
+    this._trimPattern = new RegExp(
+      `(${trimPattern.reduce((prev, curr) => {
+        const escapedCurr = this.needEscapeCharacters.includes(curr)
+          ? '\\' + curr
+          : curr;
+        return `${prev}|${escapedCurr}`;
+      }, '')})+`,
+      'g'
+    );
+    // console.log(this._trimPattern);
+  }
 
   @HostListener('input', ['$event.target.value'])
   ngOnChange = (val: string) => {
     let trimmedVal = val;
-    if (this.appTrimDate) {
-      this.appTrimDate.forEach((pattern) => {
-        trimmedVal = trimmedVal.replace(pattern, '');
-      });
+    if (this._trimPattern) {
+      trimmedVal = trimmedVal.replace(this._trimPattern, '');
     }
     this.onChange(trimmedVal.trim());
   };
@@ -40,10 +72,8 @@ export class TrimDateDirective extends DefaultValueAccessor {
   @HostListener('blur', ['$event.target.value'])
   ngOnBlur = (val: string) => {
     let trimmedVal = val;
-    if (this.appTrimDate) {
-      this.appTrimDate.forEach((pattern) => {
-        trimmedVal = trimmedVal.replace(pattern, '');
-      });
+    if (this._trimPattern) {
+      trimmedVal = trimmedVal.replace(this._trimPattern, '');
     }
     this.writeValue(trimmedVal.trim());
     this.onTouched();

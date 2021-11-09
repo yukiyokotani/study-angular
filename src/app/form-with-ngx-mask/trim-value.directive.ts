@@ -24,17 +24,48 @@ const TRIM_VALUE_ACCESSOR: Provider = {
   providers: [TRIM_VALUE_ACCESSOR],
 })
 export class TrimValueDirective extends DefaultValueAccessor {
+  private needEscapeCharacters = [
+    '/',
+    '\\',
+    "'",
+    '"',
+    '.',
+    '*',
+    '+',
+    '?',
+    '^',
+    '$',
+    '-',
+    '|',
+    '(',
+    ')',
+    '{',
+    '}',
+    '{',
+    '}',
+  ];
+
   /** trimしたいパターンのリスト */
-  @Input() appTrimValue?: RegExp[];
+  private _trimPattern?: RegExp;
+  @Input() set appTrimValue(trimPattern: string[]) {
+    this._trimPattern = new RegExp(
+      `(${trimPattern.reduce((prev, curr) => {
+        const escapedCurr = this.needEscapeCharacters.includes(curr)
+          ? '\\' + curr
+          : curr;
+        return `${prev}|${escapedCurr}`;
+      }, '')})+`,
+      'g'
+    );
+    // console.log(this._trimPattern);
+  }
 
   @HostListener('input', ['$event.target.value'])
   ngOnChange = (val: string) => {
     // console.log('change', val);
     let trimmedVal = val;
-    if (this.appTrimValue) {
-      this.appTrimValue.forEach((pattern) => {
-        trimmedVal = trimmedVal.replace(pattern, '');
-      });
+    if (this._trimPattern) {
+      trimmedVal = trimmedVal.replace(this._trimPattern, '');
     }
     this.onChange(trimmedVal.trim());
   };
@@ -43,10 +74,8 @@ export class TrimValueDirective extends DefaultValueAccessor {
   ngOnBlur = (val: string) => {
     // console.log('blur', val);
     let trimmedVal = val;
-    if (this.appTrimValue) {
-      this.appTrimValue.forEach((pattern) => {
-        trimmedVal = trimmedVal.replace(pattern, '');
-      });
+    if (this._trimPattern) {
+      trimmedVal = trimmedVal.replace(this._trimPattern, '');
     }
     this.writeValue(trimmedVal.trim());
     this.onTouched();

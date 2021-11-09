@@ -8,7 +8,6 @@ import {
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 import {
-  DateFormErrorStateMatcher,
   dateValidator,
   matchPasswordValidator,
   VerifyPasswordFormErrorStateMatcher,
@@ -38,10 +37,9 @@ export class FormComponent {
 
   /** ErrorStateMatcherの定義 */
   verifyPasswordFormErrorMatcher = new VerifyPasswordFormErrorStateMatcher();
-  birthdayFormErrorMathcer = new DateFormErrorStateMatcher();
 
   /** trim対象 */
-  trimPattern = [/\-/g, /\^/g, /,/g, /\./g, /\\/g, /\//g];
+  trimPattern = ['-', '^', ',', '.', '\\', ' '];
 
   constructor() {
     this.nameControl = new FormControl('', {
@@ -88,37 +86,27 @@ export class FormComponent {
   }
 
   public dateChangeHandler = (event: MatDatepickerInputEvent<Date>) => {
-    console.log('change', (event.targetElement as HTMLInputElement).value);
-    const isValid = this.validateUserInput(
-      (event.targetElement as HTMLInputElement).value
+    console.log('change', event.target.value);
+    if (!event.target.value) return;
+    this.birthday?.setValue(
+      this.formatISODate(event.target.value?.toISOString())
     );
-    const dateString = isValid
-      ? this.formatISODate(event.target.value?.toISOString() ?? '0000/00/00')
-      : '0000/00/00'; // 存在しない日付
-    this.birthday?.patchValue(dateString);
+    this.birthday?.markAsTouched();
+    this.birthday?.markAsDirty();
   };
 
   public dateInputHandler = (event: MatDatepickerInputEvent<Date>) => {
-    console.log('input', (event.targetElement as HTMLInputElement).value);
+    console.log('input', event.target.value);
     if (!event.target.value) return;
-    const dateString = this.formatISODate(event.target.value?.toISOString());
-    this.birthday?.patchValue(dateString);
+    this.birthday?.setValue(
+      this.formatISODate(event.target.value?.toISOString())
+    );
+    this.birthday?.markAsTouched();
+    this.birthday?.markAsDirty();
   };
 
-  // Assumes YYYY/M/D input is only valid
-  validateUserInput(value: string): boolean {
-    const [year, month, day] = value.split('/');
-    if (
-      year?.length === 4 &&
-      (month?.length === 1 || month?.length === 2) &&
-      (day?.length === 1 || day?.length === 2)
-    ) {
-      return true;
-    }
-    return false;
-  }
-
   public onSubmit(): void {
+    console.log(this.sampleForm);
     this.isSubmitted = true;
     if (this.sampleForm.invalid) return;
     this.submittedData = JSON.stringify(this.sampleForm.value);

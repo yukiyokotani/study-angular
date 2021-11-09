@@ -35,7 +35,7 @@ export class FormComponent {
   verifyPasswordFormMatcher = new VerifyPasswordFormErrorStateMatcher();
 
   /** trim対象文字 */
-  trimPattern = [/\-/g, /\^/g, /,/g, /\./g, /\\/g, /\//g];
+  trimPattern = ['-', '^', ',', '.', '\\', '/', ' '];
 
   constructor() {
     this.nameControl = new FormControl('', {

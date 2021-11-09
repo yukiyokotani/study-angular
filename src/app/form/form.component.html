@@ -14,15 +14,50 @@
           バリデーションの制御を加えたフォームのサンプル
         </mat-card-subtitle>
         <mat-card-content>
+          <p>概要</p>
           <ul>
-            <li>ユーザー名は6文字以上12文字以内</li>
+            <li>Custom Validatotion</li>
+            <ul>
+              <li>
+                誕生日のフォームで「有効な日付かどうか」の判定に対して実装。
+              </li>
+            </ul>
+            <li>Cross-field Validation</li>
+            <ul>
+              <li>
+                「パスワードと確認用パスワードが一致しているかどうか」の判定に対して実装。
+              </li>
+            </ul>
             <li>
-              ユーザー名は入力値から次の文字を取り除き、先頭末尾の空白文字をトリムする
-              [,.-^/\]
+              テキストのトリミング
+              <ul>
+                <li>ユーザー名のフォームに自作したDirectiveで実装</li>
+                <li>
+                  Directiveは入力値から次の文字を取り除き、先頭末尾の空白文字をトリムする。
+                  ['-', '^', ',', '.', '\\', ' '] (設定可能)
+                </li>
+              </ul>
             </li>
-            <li>ユーザー名はblurでformControlに値がセットされる</li>
-            <li>パスワードはsubmitでformControlに値がセットされる</li>
+            <li>
+              誕生日の入力
+              <ul>
+                <li>
+                  MatDatePickerはISO
+                  8601形式でしか日付を管理できないため、hiddenのinputと組み合わせて管理する。
+                </li>
+                <li>
+                  直接利用しないISO 8601形式の日付をhiddenのinputで管理する。
+                </li>
+                <li>
+                  hiddenのinputに対するdateChangeを拾って、formControlにpatchValueする。
+                </li>
+                <li>
+                  formControlをバインドしている（見えている）inputは入力をDirectiveでトリムする。
+                </li>
+              </ul>
+            </li>
           </ul>
+          <mat-divider inset></mat-divider>
           <div fxLayout="row wrap" fxLayoutGap="8px grid">
             <mat-form-field
               appearance="fill"
@@ -42,6 +77,7 @@
                 required
                 [appTrimCustomValue]="trimPattern"
               />
+              <mat-hint>6文字以上12文字以内で入力してください</mat-hint>
               <mat-error
                 *ngIf="sampleForm.touched || sampleForm.dirty || isSubmitted"
               >
@@ -123,22 +159,33 @@
                 id="birthday"
                 name="birthday"
                 required
+                formControlName="birthday"
+                [appTrimDate]="trimPattern"
+              />
+              <input
+                type="hidden"
                 [matDatepicker]="picker"
-                [errorStateMatcher]="birthdayFormErrorMathcer"
                 (dateChange)="dateChangeHandler($event)"
                 (dateInput)="dateInputHandler($event)"
               />
-              <input type="hidden" formControlName="birthday" />
               <mat-datepicker-toggle
                 matSuffix
                 [for]="picker"
               ></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
+              <mat-hint>YYYY/MM/DD</mat-hint>
               <mat-error
                 *ngIf="sampleForm.touched || sampleForm.dirty || isSubmitted"
               >
                 <div *ngIf="birthday?.errors?.required">
                   誕生日は必須項目です
+                </div>
+                <div
+                  *ngIf="
+                    !birthday?.errors?.required && birthday?.errors?.invalidDate
+                  "
+                >
+                  存在する日付を入力してください
                 </div>
               </mat-error>
             </mat-form-field>

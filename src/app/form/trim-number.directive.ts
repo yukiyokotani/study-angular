@@ -36,8 +36,41 @@ const TRIM_VALUE_ACCESSOR: Provider = {
   ],
 })
 export class TrimNumberDirective extends DefaultValueAccessor {
+  private needEscapeCharacters = [
+    '/',
+    '\\',
+    "'",
+    '"',
+    '.',
+    '*',
+    '+',
+    '?',
+    '^',
+    '$',
+    '-',
+    '|',
+    '(',
+    ')',
+    '{',
+    '}',
+    '{',
+    '}',
+  ];
+
   /** trimしたいパターンのリスト */
-  @Input() appTrimNumber?: RegExp[];
+  private _trimPattern?: RegExp;
+  @Input() set appTrimNumber(trimPattern: string[]) {
+    this._trimPattern = new RegExp(
+      `(${trimPattern.reduce((prev, curr) => {
+        const escapedCurr = this.needEscapeCharacters.includes(curr)
+          ? '\\' + curr
+          : curr;
+        return `${prev}|${escapedCurr}`;
+      }, '')})+`,
+      'g'
+    );
+    // console.log(this._trimPattern);
+  }
 
   constructor(
     private decimalPipe: DecimalPipe,
@@ -54,10 +87,8 @@ export class TrimNumberDirective extends DefaultValueAccessor {
   ngOnChange = (val: string) => {
     // console.log('change', val);
     let trimmedVal = val;
-    if (this.appTrimNumber) {
-      this.appTrimNumber.forEach((pattern) => {
-        trimmedVal = trimmedVal.replace(pattern, '');
-      });
+    if (this._trimPattern) {
+      trimmedVal = trimmedVal.replace(this._trimPattern, '');
     }
     this.onChange(trimmedVal.trim());
   };
@@ -77,10 +108,8 @@ export class TrimNumberDirective extends DefaultValueAccessor {
   ngOnBlur = (val: string) => {
     // console.log('blur', val);
     let trimmedVal = val;
-    if (this.appTrimNumber) {
-      this.appTrimNumber.forEach((pattern) => {
-        trimmedVal = trimmedVal.replace(pattern, '');
-      });
+    if (this._trimPattern) {
+      trimmedVal = trimmedVal.replace(this._trimPattern, '');
     }
     const valWithThousandsSeparator = this.decimalPipe.transform(
       trimmedVal.trim(),
