@@ -5,11 +5,16 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 import {
+  dateValidator,
   matchPasswordValidator,
   VerifyPasswordFormErrorStateMatcher,
 } from './cutom-validators';
+
+// From native date adapter in Angualr Material
+export const ISO_8601_REGEX = /^(\d{4})-(\d{2})-(\d{2})(?:T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|(?:(?:\+|-)\d{2}:\d{2}))?)?$/;
 
 @Component({
   selector: 'app-form',
@@ -31,10 +36,10 @@ export class FormComponent {
   public savingsControl: FormControl;
 
   /** ErrorStateMatcherの定義 */
-  verifyPasswordFormMatcher = new VerifyPasswordFormErrorStateMatcher();
+  verifyPasswordFormErrorMatcher = new VerifyPasswordFormErrorStateMatcher();
 
   /** trim対象 */
-  trimPattern = [/\-/g, /\^/g, /,/g, /\./g, /\\/g, /\//g];
+  trimPattern = ['-', '^', ',', '.', '\\', ' '];
 
   constructor() {
     this.nameControl = new FormControl('', {
@@ -54,7 +59,7 @@ export class FormComponent {
       updateOn: 'submit',
     });
     this.birthdayControl = new FormControl('', {
-      validators: [Validators.required],
+      validators: [Validators.required, dateValidator],
       updateOn: 'blur',
     });
     this.savingsControl = new FormControl('', {
@@ -80,10 +85,42 @@ export class FormComponent {
     );
   }
 
+  public dateChangeHandler = (event: MatDatepickerInputEvent<Date>) => {
+    console.log('change', event.target.value);
+    if (!event.target.value) return;
+    this.birthday?.setValue(
+      this.formatISODate(event.target.value?.toISOString())
+    );
+    this.birthday?.markAsTouched();
+    this.birthday?.markAsDirty();
+  };
+
+  public dateInputHandler = (event: MatDatepickerInputEvent<Date>) => {
+    console.log('input', event.target.value);
+    if (!event.target.value) return;
+    this.birthday?.setValue(
+      this.formatISODate(event.target.value?.toISOString())
+    );
+    this.birthday?.markAsTouched();
+    this.birthday?.markAsDirty();
+  };
+
   public onSubmit(): void {
+    console.log(this.sampleForm);
     this.isSubmitted = true;
     if (this.sampleForm.invalid) return;
     this.submittedData = JSON.stringify(this.sampleForm.value);
+  }
+
+  private formatISODate(value: string): string | null {
+    if (ISO_8601_REGEX.test(value)) {
+      const date = new Date(value);
+      if (!isNaN(date.getTime())) {
+        date.setMinutes(date.getMinutes() + 540);
+        return date?.toISOString().replace(ISO_8601_REGEX, `$1/$2/$3`);
+      }
+    }
+    return value;
   }
 
   get name(): AbstractControl | null {

@@ -34,7 +34,7 @@
                 <li>ユーザー名のフォームに自作したDirectiveで実装</li>
                 <li>
                   Directiveは入力値から次の文字を取り除き、先頭末尾の空白文字をトリムする。
-                  [,.-^/\] (設定可能)
+                  ['-', '^', ',', '.', '\\', '/', ' '] (設定可能)
                 </li>
               </ul>
             </li>
@@ -74,6 +74,7 @@
                 required
                 [appTrimValue]="trimPattern"
               />
+              <mat-hint>6文字以上12文字以内で入力してください</mat-hint>
               <mat-error
                 *ngIf="sampleForm.touched || sampleForm.dirty || isSubmitted"
               >
@@ -160,6 +161,7 @@
                 [showMaskTyped]="true"
                 [dropSpecialCharacters]="true"
               />
+              <mat-hint>YYYY/MM/DD</mat-hint>
               <mat-error
                 *ngIf="sampleForm.touched || sampleForm.dirty || isSubmitted"
               >
@@ -192,6 +194,7 @@
                 required
                 mask="separator.2"
                 thousandSeparator=","
+                suffix="円"
                 [dropSpecialCharacters]="true"
               />
               <mat-error

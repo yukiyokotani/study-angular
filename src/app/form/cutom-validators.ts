@@ -7,6 +7,7 @@ import {
   ValidatorFn,
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import * as dayjs from 'dayjs';
 
 export const matchPasswordValidator: ValidatorFn = (
   control: AbstractControl
@@ -33,3 +34,13 @@ export class VerifyPasswordFormErrorStateMatcher implements ErrorStateMatcher {
     );
   }
 }
+
+export const dateValidator: ValidatorFn = (
+  control: AbstractControl
+): ValidationErrors | null => {
+  const format = 'YYYY/MM/DD';
+  const date = control.value;
+  const isValid =
+    typeof date === 'string' && dayjs(date, format).format(format) === date;
+  return isValid ? null : { invalidDate: true };
+};
