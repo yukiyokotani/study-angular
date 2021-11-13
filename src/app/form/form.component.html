@@ -165,6 +165,7 @@
               <input
                 type="hidden"
                 [matDatepicker]="picker"
+                [value]="convertToISODateFromYYYYMMDD(birthday?.value)"
                 (dateChange)="dateChangeHandler($event)"
                 (dateInput)="dateInputHandler($event)"
               />

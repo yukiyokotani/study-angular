@@ -13,8 +13,8 @@ import {
   VerifyPasswordFormErrorStateMatcher,
 } from './cutom-validators';
 
-// From native date adapter in Angualr Material
 export const ISO_8601_REGEX = /^(\d{4})-(\d{2})-(\d{2})(?:T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|(?:(?:\+|-)\d{2}:\d{2}))?)?$/;
+export const CUSTOM_YMD_REGEX = /^(\d{4})\/(\d{2})\/(\d{2})$/;
 
 @Component({
   selector: 'app-form',
@@ -89,7 +89,7 @@ export class FormComponent {
     console.log('change', event.target.value);
     if (!event.target.value) return;
     this.birthday?.setValue(
-      this.formatISODate(event.target.value?.toISOString())
+      this.convertToYYYYMMDDFromISODate(event.target.value?.toISOString())
     );
     this.birthday?.markAsTouched();
     this.birthday?.markAsDirty();
@@ -99,7 +99,7 @@ export class FormComponent {
     console.log('input', event.target.value);
     if (!event.target.value) return;
     this.birthday?.setValue(
-      this.formatISODate(event.target.value?.toISOString())
+      this.convertToYYYYMMDDFromISODate(event.target.value?.toISOString())
     );
     this.birthday?.markAsTouched();
     this.birthday?.markAsDirty();
@@ -112,7 +112,17 @@ export class FormComponent {
     this.submittedData = JSON.stringify(this.sampleForm.value);
   }
 
-  private formatISODate(value: string): string | null {
+  public convertToISODateFromYYYYMMDD(value: string): string {
+    const found = value.match(CUSTOM_YMD_REGEX);
+    if (!found || found[0] !== value) return value;
+    return new Date(
+      Number(found[1]),
+      Number(found[2]) - 1,
+      Number(found[3])
+    ).toISOString();
+  }
+
+  private convertToYYYYMMDDFromISODate(value: string): string | null {
     if (ISO_8601_REGEX.test(value)) {
       const date = new Date(value);
       if (!isNaN(date.getTime())) {
