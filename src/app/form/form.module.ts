@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
+import { DatePickerComponent } from './date-input/date-picker.component';
 import { FormRoutingModule } from './form-routing.module';
 import { FormComponent } from './form.component';
 import { TrimDateDirective } from './trim-date.directive';
@@ -25,6 +26,7 @@ import { TrimCustomValueDirective } from './trimu-custom-value.directive';
     TrimCustomValueDirective,
     TrimNumberDirective,
     TrimDateDirective,
+    DatePickerComponent,
   ],
   imports: [
     CommonModule,

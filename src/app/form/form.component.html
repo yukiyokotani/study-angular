@@ -162,7 +162,8 @@
                 formControlName="birthday"
                 [appTrimDate]="trimPattern"
               />
-              <input
+              <app-date-picker [control]="birthday"></app-date-picker>
+              <!-- <input
                 type="hidden"
                 [matDatepicker]="picker"
                 [value]="convertToISODateFromYYYYMMDD(birthday?.value)"
@@ -173,7 +174,7 @@
                 matSuffix
                 [for]="picker"
               ></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
+              <mat-datepicker #picker></mat-datepicker> -->
               <mat-hint>YYYY/MM/DD</mat-hint>
               <mat-error
                 *ngIf="sampleForm.touched || sampleForm.dirty || isSubmitted"
