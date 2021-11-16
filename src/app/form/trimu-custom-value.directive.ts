@@ -45,10 +45,10 @@ export class TrimCustomValueDirective extends DefaultValueAccessor {
     '}',
   ];
 
-  /** trimしたいパターンのリスト */
-  private _trimPattern?: RegExp;
+  /** filterしたいパターンのリスト */
+  private _filterPattern?: RegExp;
   @Input() set appTrimCustomValue(trimPattern: string[]) {
-    this._trimPattern = new RegExp(
+    this._filterPattern = new RegExp(
       `(${trimPattern.reduce((prev, curr) => {
         const escapedCurr = this.needEscapeCharacters.includes(curr)
           ? '\\' + curr
@@ -57,32 +57,28 @@ export class TrimCustomValueDirective extends DefaultValueAccessor {
       }, '')})+`,
       'g'
     );
-    // console.log(this._trimPattern);
   }
 
   @HostListener('input', ['$event.target.value'])
   ngOnChange = (val: string) => {
-    // console.log('change', val);
-    let trimmedVal = val;
-    if (this._trimPattern) {
-      trimmedVal = trimmedVal.replace(this._trimPattern, '');
+    let filteredVal = val;
+    if (this._filterPattern) {
+      filteredVal = filteredVal.replace(this._filterPattern, '');
     }
-    this.onChange(trimmedVal.trim());
+    this.onChange(filteredVal.trim());
   };
 
   @HostListener('blur', ['$event.target.value'])
   ngOnBlur = (val: string) => {
-    // console.log('blur', val);
-    let trimmedVal = val;
-    if (this._trimPattern) {
-      trimmedVal = trimmedVal.replace(this._trimPattern, '');
+    let filteredVal = val;
+    if (this._filterPattern) {
+      filteredVal = filteredVal.replace(this._filterPattern, '');
     }
-    this.writeValue(trimmedVal.trim());
+    this.writeValue(filteredVal.trim());
     this.onTouched();
   };
 
   writeValue(value: any): void {
-    // console.log('writeValue', value);
     if (typeof value === 'string') {
       value = value.trim();
     }
