@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 
 @Component({
   templateUrl: './iframe.component.html',
-  styleUrls: ['./iframe.component.css'],
+  styleUrls: ['./iframe.component.scss'],
 })
 export class IframeComponent implements OnInit {
   urlSafe!: SafeResourceUrl;

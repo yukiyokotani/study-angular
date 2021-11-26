@@ -6,7 +6,7 @@ import { ItemListService } from './item-list.service';
 
 @Component({
   templateUrl: './nested-event-binding.component.html',
-  styleUrls: ['./nested-event-binding.component.css'],
+  styleUrls: ['./nested-event-binding.component.scss'],
 })
 export class NestedEventBindingComponent implements OnInit, OnDestroy {
   itemListSubscription: Subscription;

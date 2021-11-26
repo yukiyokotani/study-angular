@@ -5,9 +5,5 @@
   (dateChange)="dateChangeHandler($event)"
   (dateInput)="dateInputHandler($event)"
 />
-<mat-datepicker-toggle
-  class="date-picker"
-  matSuffix
-  [for]="picker"
-></mat-datepicker-toggle>
+<mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
 <mat-datepicker #picker></mat-datepicker>

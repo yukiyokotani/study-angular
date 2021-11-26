@@ -20,6 +20,7 @@ import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BroadcastModule } from './broadcast/broadcast.module';
 import { CustomMatcherComponent } from './custom-matcher/custom-matcher.component';
 import { HighlightDirective } from './directives/highlight.directive';
 import { DynamicTabsComponent } from './dynamic-tabs/dynamic-tabs.component';
@@ -81,6 +82,7 @@ import { WebsocketComponent } from './websocket/websocket.component';
     MatTableModule,
     MatInputModule,
     MatCardModule,
+    BroadcastModule,
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'ja' }],
   bootstrap: [AppComponent],

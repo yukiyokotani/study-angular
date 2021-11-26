@@ -14,7 +14,7 @@ import { TabComponent } from '../tab/tab.component';
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
-  styleUrls: ['./tabs.component.css'],
+  styleUrls: ['./tabs.component.scss'],
 })
 export class TabsComponent implements AfterContentInit {
   // 画面にマウントされているすべてのTabCompoennt (子コンポーネント)

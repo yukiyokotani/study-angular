@@ -5,7 +5,7 @@ import { ComponentBase } from '../item';
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css'],
+  styleUrls: ['./test.component.scss'],
 })
 export class TestComponent implements ComponentBase, OnInit {
   @Input() id!: string;

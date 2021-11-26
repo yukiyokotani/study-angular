@@ -3,7 +3,7 @@ import { environment } from 'src/environments/environment';
 
 @Component({
   templateUrl: './embedded-page.component.html',
-  styleUrls: ['./embedded-page.component.css'],
+  styleUrls: ['./embedded-page.component.scss'],
 })
 export class EmbeddedPageComponent implements OnInit {
   message = '';
