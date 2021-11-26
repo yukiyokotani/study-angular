@@ -6,7 +6,7 @@ import { ItemListService } from './item-list.service';
 
 @Component({
   templateUrl: './ts-class-subscription.component.html',
-  styleUrls: ['./ts-class-subscription.component.css'],
+  styleUrls: ['./ts-class-subscription.component.scss'],
 })
 export class TsClassSubscriptionComponent implements OnInit, OnDestroy {
   itemListSubscription: Subscription;

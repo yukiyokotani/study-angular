@@ -5,7 +5,7 @@ import { SocketioService } from './socketio.service';
 
 @Component({
   templateUrl: './websocket.component.html',
-  styleUrls: ['./websocket.component.css'],
+  styleUrls: ['./websocket.component.scss'],
 })
 export class WebsocketComponent implements OnInit {
   message = new FormControl('', Validators.required);

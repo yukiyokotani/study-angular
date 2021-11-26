@@ -1,0 +1,39 @@
+<div
+  fxLayout="column"
+  fxLayoutGap="16px"
+  fxLayoutAlign="center"
+  class="container"
+  fxFlex="80%"
+  fxFlex.lt-sm="100%"
+>
+  <mat-card>
+    <mat-card-title>Broadcast Channel API</mat-card-title>
+    <mat-card-subtitle>
+      Broadcast channelでメッセージを送信するサンプル
+    </mat-card-subtitle>
+    <mat-card-content>
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="handleClickSendMessage('Hello')"
+      >
+        送信
+        <mat-icon aria-hidden="false" aria-label="info icon">send</mat-icon>
+      </button>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-title>Sent Messages</mat-card-title>
+    <mat-card-subtitle> 送信したメッセージ </mat-card-subtitle>
+    <mat-card-content>
+      <div *ngFor="let sent of sentMessageList">{{ sent }}</div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-title>Received Messages</mat-card-title>
+    <mat-card-subtitle> 受信したメッセージ </mat-card-subtitle>
+    <mat-card-content>
+      <div *ngFor="let received of receivedMessageList">{{ received }}</div>
+    </mat-card-content>
+  </mat-card>
+</div>

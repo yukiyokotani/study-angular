@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 
 @Component({
   templateUrl: './custom-matcher.component.html',
-  styleUrls: ['./custom-matcher.component.css'],
+  styleUrls: ['./custom-matcher.component.scss'],
 })
 export class CustomMatcherComponent implements OnInit {
   rest$?: Observable<string | null>;

@@ -6,7 +6,7 @@ import { Wine } from '../wine-form/wine-form.component';
 @Component({
   selector: 'app-wines-list',
   templateUrl: './wines-list.component.html',
-  styleUrls: ['./wines-list.component.css'],
+  styleUrls: ['./wines-list.component.scss'],
 })
 export class WinesListComponent implements OnInit {
   @Input() wines?: Wine[];

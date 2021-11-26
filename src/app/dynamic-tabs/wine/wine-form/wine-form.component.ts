@@ -13,7 +13,7 @@ export type Wine = {
 @Component({
   selector: 'app-wine-form',
   templateUrl: './wine-form.component.html',
-  styleUrls: ['./wine-form.component.css'],
+  styleUrls: ['./wine-form.component.scss'],
 })
 export class WineFormComponent implements OnInit {
   @Input() wine?: Wine;

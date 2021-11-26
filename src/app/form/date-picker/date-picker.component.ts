@@ -8,7 +8,6 @@ export const CUSTOM_YMD_REGEX = /^(\d{4})\/(\d{2})\/(\d{2})$/;
 @Component({
   selector: 'app-date-picker',
   templateUrl: './date-picker.component.html',
-  styleUrls: ['./date-picker.component.scss'],
 })
 export class DatePickerComponent {
   @Input() control?: AbstractControl | null;

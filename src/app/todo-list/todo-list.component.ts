@@ -6,7 +6,7 @@ import todoSlice, { Todo, selectTodos } from './todoSlice';
 
 @Component({
   templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.css'],
+  styleUrls: ['./todo-list.component.scss'],
 })
 export class TodoListComponent implements OnInit {
   todos$ = this.store.select(createSelector(selectTodos, (state) => state));

@@ -162,7 +162,10 @@
                 formControlName="birthday"
                 [appTrimDate]="trimPattern"
               />
-              <app-date-picker matSuffix [control]="birthday"></app-date-picker>
+              <app-date-picker
+                matSuffix
+                [control]="birthdayControl"
+              ></app-date-picker>
               <mat-hint>YYYY/MM/DD</mat-hint>
               <mat-error
                 *ngIf="sampleForm.touched || sampleForm.dirty || isSubmitted"
