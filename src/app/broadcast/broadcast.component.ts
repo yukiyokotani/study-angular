@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ApplicationRef, Component, HostListener, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil, timeout } from 'rxjs/operators';
 
@@ -21,7 +21,11 @@ export class BroadcastComponent implements OnInit {
   private response$ = new Subject<MessageEvent<BroadcastMessage>>();
   private stopSubscribe$ = new Subject();
 
-  constructor() {}
+  constructor(private appRef: ApplicationRef) {}
+
+  @HostListener('window:focus') onFocus() {
+    this.appRef.tick();
+  }
 
   ngOnInit(): void {
     this.bc.onmessage = (ev: MessageEvent<BroadcastMessage>) => {
