@@ -1,0 +1,19 @@
+<div
+  fxLayout="row wrap"
+  fxLayoutGap="8px"
+  fxLayoutAlign="center"
+  class="container"
+>
+  <mat-card fxFlex="80%" fxFlex.lt-sm="100%">
+    <h1>History</h1>
+    <p>Count: {{ count }}</p>
+    <button
+      mat-stroked-button
+      type="submit"
+      color="primary"
+      (click)="handleClick()"
+    >
+      Click Me!
+    </button>
+  </mat-card>
+</div>

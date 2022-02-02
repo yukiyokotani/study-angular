@@ -80,6 +80,11 @@ const routes: Routes = [
     },
     component: CustomMatcherComponent,
   },
+  {
+    path: 'history',
+    loadChildren: () =>
+      import('./history/history.module').then((m) => m.HistoryModule),
+  },
 ];
 
 @NgModule({
