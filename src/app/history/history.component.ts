@@ -12,13 +12,6 @@ export class HistoryComponent {
   constructor(private location: Location) {
     this.location.subscribe((popStateEvent: PopStateEvent) => {
       if (popStateEvent.type === 'popstate') {
-        this.location.replaceState(
-          '/history',
-          `count=${this.count.toString()}`,
-          {
-            test: true,
-          }
-        );
         console.log(popStateEvent);
       }
     });
