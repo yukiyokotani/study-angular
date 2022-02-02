@@ -1,35 +1,62 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { environment } from 'src/environments/environment';
+
+export type MessageContent = {
+  type: 'MESSAGE';
+  content: string;
+};
 
 @Component({
   templateUrl: './embedded-page.component.html',
   styleUrls: ['./embedded-page.component.scss'],
 })
-export class EmbeddedPageComponent implements OnInit {
-  message = '';
+export class EmbeddedPageComponent {
+  public receivedMessage = '';
 
-  constructor() {}
+  public form: FormGroup;
+  public messageControl: FormControl;
 
-  @HostListener('window:message', ['$event']) onPostMessage(
-    event: MessageEvent
+  constructor() {
+    this.messageControl = new FormControl('', {
+      updateOn: 'submit',
+    });
+    this.form = new FormGroup({
+      message: this.messageControl,
+    });
+  }
+
+  @HostListener('window:message', ['$event']) onMessage(
+    event: MessageEvent<MessageContent>
   ) {
     if (
       !(event.source instanceof MessagePort) &&
       !(event.source instanceof ServiceWorker)
     ) {
-      if (event.data.type === 'message') {
-        this.message = event.data.value.message;
+      if (event.data.type === 'MESSAGE') {
+        this.receivedMessage = event.data.content;
       }
     }
   }
 
-  ngOnInit(): void {
-    window.parent.postMessage(
-      {
-        type: 'message',
-        value: { message: 'Hello! I send this message from iframe!' },
-      },
-      `${environment.host}/iframe`
-    );
+  public onSubmit() {
+    this.postMessage({
+      type: 'MESSAGE',
+      content: this.form.value.message,
+    });
+    this.form.reset();
+  }
+
+  private postMessage(message: MessageContent) {
+    window.parent.postMessage(message, environment.host);
+  }
+
+  get message(): AbstractControl | null {
+    return this.form.get('message');
   }
 }

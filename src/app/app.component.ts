@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'study-angular';
+  public title = 'study-angular';
+  public showToolbar = true;
+
+  constructor(private route: ActivatedRoute) {
+    this.route.queryParamMap.subscribe((params) => {
+      this.showToolbar = params.get('showToolbar') !== 'false';
+    });
+  }
 }
