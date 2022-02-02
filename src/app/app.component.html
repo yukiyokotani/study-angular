@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" *ngIf="showToolbar">
   <button
     mat-icon-button
     class="example-icon"
@@ -27,6 +27,7 @@
       nested-event-binding
     </button>
     <button mat-menu-item routerLink="/broadcast">broadcast</button>
+    <button mat-menu-item routerLink="/history">history</button>
   </mat-menu>
   <span>{{ title }}</span>
 </mat-toolbar>

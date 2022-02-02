@@ -5,9 +5,42 @@
   class="container"
 >
   <mat-card fxFlex="80%" fxFlex.lt-sm="100%">
-    <h1>iframe</h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <h1>iframe</h1>
+      <mat-card-content>
+        <div>
+          <mat-form-field
+            appearance="fill"
+            fxFlex="calc(33% - 8px)"
+            fxFlex.lt-md="calc(50% - 8px)"
+            fxFlex.lt-sm="100%"
+          >
+            <mat-label>メッセージ</mat-label>
+            <input
+              matInput
+              placeholder="メッセージ"
+              id="message"
+              name="message"
+              formControlName="message"
+            />
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-flat-button type="submit" color="primary">
+          <mat-icon aria-hidden="false" aria-label="info icon">send</mat-icon>
+          送信
+        </button>
+      </mat-card-actions>
+    </form>
+    <div>
+      <p>
+        <span>Received Message: </span><span>{{ receivedMessage }}</span>
+      </p>
+    </div>
     <div>
       <iframe
+        #iframe
         id="inlineFrameExample"
         title="Inline Frame Example"
         width="100%"
@@ -15,9 +48,6 @@
         [src]="urlSafe"
       >
       </iframe>
-    </div>
-    <div>
-      <span>Received Message: </span><span>{{ message }}</span>
     </div>
   </mat-card>
 </div>
