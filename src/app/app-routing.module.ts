@@ -85,6 +85,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./history/history.module').then((m) => m.HistoryModule),
   },
+  {
+    path: 'ng-component-outlet',
+    loadChildren: () =>
+      import('./ng-component-outlet/ng-component-outlet.module').then(
+        (m) => m.NgComponentOutletModule
+      ),
+  },
 ];
 
 @NgModule({
