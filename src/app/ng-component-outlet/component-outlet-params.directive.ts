@@ -8,12 +8,10 @@ import { ComponentOutletParams } from './component-outlet-params.service';
     { provide: ComponentOutletParams, useValue: new ComponentOutletParams() },
   ],
 })
-export class ComponentOutletParamDirective {
-  constructor(private componentOutletParams: ComponentOutletParams) {}
+export class ComponentOutletParamDirective<T> {
+  constructor(private componentOutletParams: ComponentOutletParams<T>) {}
 
-  @Input() set appComponentOutletParams(
-    params: Record<string, unknown> | undefined
-  ) {
-    this.componentOutletParams.params$.next(params ?? {});
+  @Input() set appComponentOutletParams(params: T | undefined) {
+    this.componentOutletParams.params = params;
   }
 }
