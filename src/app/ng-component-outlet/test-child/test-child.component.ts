@@ -8,7 +8,11 @@ import { ComponentOutletParams } from '../component-outlet-params.service';
   styleUrls: ['./test-child.component.scss'],
 })
 export class TestChildComponent implements OnInit {
-  constructor(private componentOutletParams: ComponentOutletParams) {}
+  constructor(
+    private componentOutletParams: ComponentOutletParams<
+      Record<string, unknown>
+    >
+  ) {}
 
   ngOnInit(): void {
     this.componentOutletParams.params$.subscribe((params) => {
