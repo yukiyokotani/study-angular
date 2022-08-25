@@ -4,9 +4,7 @@ import { ComponentOutletParams } from './component-outlet-params.service';
 
 @Directive({
   selector: '[appComponentOutletParams]',
-  providers: [
-    { provide: ComponentOutletParams, useValue: new ComponentOutletParams() },
-  ],
+  providers: [ComponentOutletParams],
 })
 export class ComponentOutletParamDirective<T> {
   constructor(private componentOutletParams: ComponentOutletParams<T>) {}
